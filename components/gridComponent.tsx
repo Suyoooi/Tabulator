@@ -1,25 +1,33 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
-import { ReactTabulator, ReactTabulatorOptions } from "react-tabulator";
+import { ReactTabulator } from "react-tabulator";
 import "react-tabulator/lib/styles.css";
 
-const GridComponent = () => {
-  const [data, setData] = useState([
-    { id: 1, name: "John Doe", age: 25, email: "john.doe@example.com" },
-    { id: 2, name: "Jane Smith", age: 30, email: "jane.smith@example.com" },
-  ]);
+interface TableDataItem {
+  id: number;
+  name: string;
+  age: string;
+  col: string;
+  dob: string;
+}
 
-  // csv download
+const GridComponent = () => {
+  const tableRef = useRef<ReactTabulator | null>(null);
+  const [tableData, setTableData] = useState<TableDataItem[]>([]);
+
+  // csv 형식으로 저장
   const handleExportCSV = () => {
     if (tableRef.current && tableRef.current.table) {
-      tableRef.current.table.download("csv", "data.csv");
+      const table = tableRef.current.table;
+      table.download("csv", "data.csv");
     }
   };
 
-  // xlsx download
+  // xlsx 형식으로 저장
   const handleExportXLSX = () => {
     if (tableRef.current && tableRef.current.table) {
-      const data = tableRef.current.table.getData();
+      const table = tableRef.current.table;
+      const data = table.getData();
       const worksheet = XLSX.utils.json_to_sheet(data);
       const workbook = XLSX.utils.book_new();
       XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
