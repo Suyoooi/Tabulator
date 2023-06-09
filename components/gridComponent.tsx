@@ -100,13 +100,13 @@ const GridComponent = () => {
           layout={"fitData"}
         />
         <button
-          style={{ backgroundColor: "lightgray", width: 100, borderRadius: 10 }}
+          style={{ backgroundColor: "lightgray", width: 150, borderRadius: 10 }}
           onClick={handleExportCSV}
         >
           Export as CSV
         </button>
         <button
-          style={{ backgroundColor: "lightgray", width: 100, borderRadius: 10 }}
+          style={{ backgroundColor: "lightgray", width: 150, borderRadius: 10 }}
           onClick={handleExportXLSX}
         >
           Export as XLSX
