@@ -1,0 +1,59 @@
+.tabulator .tabulator-header {
+  color: #fff;
+  font-weight: 500;
+  font-size: small;
+  height: 33px;
+}
+
+.tabulator .tabulator-header,
+.tabulator .tabulator-header .tabulator-col {
+  background-color: #9da9b7;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  padding: 12px 8px;
+}
+
+.tabulator
+  .tabulator-header
+  .tabulator-col
+  .tabulator-col-content
+  .tabulator-col-sorter {
+  right: 10px;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  border-right: none;
+  background-color: #9da9b7;
+}
+
+.tabulator .tabulator-header .tabulator-col .tabulator-col-content {
+  padding: 0.45857em 0.78571em;
+}
+
+.tabulator
+  .tabulator-header
+  .tabulator-col.tabulator-sortable
+  .tabulator-col-title {
+  padding-right: 25px;
+  padding-top: 8px;
+}
+
+/* header title */
+.tabulator
+  .tabulator-header
+  .tabulator-col
+  .tabulator-col-content
+  .tabulator-col-title {
+  padding-top: 8px;
+}
+
+/* header 화살표 */
+.tabulator
+  .tabulator-header
+  .tabulator-col.tabulator-sortable[aria-sort="none"]
+  .tabulator-col-content
+  .tabulator-col-sorter
+  .tabulator-arrow {
+  padding-top: 8px;
+}
