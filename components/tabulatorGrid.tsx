@@ -4,6 +4,39 @@ import { ReactTabulator } from "react-tabulator";
 import "react-tabulator/lib/styles.css";
 
 const TabulatorGrid = () => {
+  const tableRef = useRef<ReactTabulator | null>(null);
+
+  // csv 형식으로 저장
+  const handleExportCSV = () => {
+    if (tableRef.current && tableRef.current.table) {
+      const table = tableRef.current.table;
+      table.download("csv", "data.csv");
+    }
+  };
+
+  // xlsx 형식으로 저장
+  const handleExportXLSX = () => {
+    if (tableRef.current && tableRef.current.table) {
+      const table = tableRef.current.table;
+      const data = table.getData();
+      const worksheet = XLSX.utils.json_to_sheet(data);
+      const workbook = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(workbook, worksheet, "Data");
+      const excelBuffer = XLSX.write(workbook, {
+        bookType: "xlsx",
+        type: "array",
+      });
+      const excelData = new Blob([excelBuffer], {
+        type: "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+      });
+      const excelUrl = URL.createObjectURL(excelData);
+      const link = document.createElement("a");
+      link.href = excelUrl;
+      link.download = "data.xlsx";
+      link.click();
+    }
+  };
+
   const columns = [
     {
       formatter: "responsiveCollapse",
@@ -26,7 +59,7 @@ const TabulatorGrid = () => {
     },
   ];
 
-  var list = [
+  const list = [
     {
       id: 1,
       price: 2,
@@ -66,7 +99,24 @@ const TabulatorGrid = () => {
   return (
     <>
       <div>
-        <ReactTabulator options={options} data={list} columns={columns} />
+        <ReactTabulator
+          ref={tableRef}
+          options={options}
+          data={list}
+          columns={columns}
+        />
+        <button
+          style={{ backgroundColor: "white", width: 150, borderRadius: 10 }}
+          onClick={handleExportCSV}
+        >
+          Export as CSV
+        </button>
+        <button
+          style={{ backgroundColor: "white", width: 150, borderRadius: 10 }}
+          onClick={handleExportXLSX}
+        >
+          Export as XLSX
+        </button>
       </div>
     </>
   );
