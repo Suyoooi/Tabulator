@@ -1,20 +1,27 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { ReactTabulator } from "react-tabulator";
 import "react-tabulator/lib/styles.css";
 
 const TabulatorGrid = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
+  const [newData, setNewData] = useState<
+    {
+      id: number;
+      price: number;
+      quantity: number;
+      product: string;
+      availability: string;
+    }[]
+  >([]);
 
-  // csv 형식으로 저장
   const handleExportCSV = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
-      table.download("csv", "data.csv");
+      table.download("csv", "test.csv");
     }
   };
 
-  // xlsx 형식으로 저장
   const handleExportXLSX = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
@@ -32,9 +39,21 @@ const TabulatorGrid = () => {
       const excelUrl = URL.createObjectURL(excelData);
       const link = document.createElement("a");
       link.href = excelUrl;
-      link.download = "data.xlsx";
+      link.download = "test.xlsx";
       link.click();
     }
+  };
+
+  const handleAddData = () => {
+    const nextId = list.length + newData.length + 1;
+    const newEntry = {
+      id: nextId,
+      price: 0,
+      quantity: 0,
+      product: "",
+      availability: "",
+    };
+    setNewData([...newData, newEntry]);
   };
 
   const columns = [
@@ -47,7 +66,6 @@ const TabulatorGrid = () => {
       headerSort: false,
     },
     { title: "ID", field: "id", width: 50, sorter: "number" },
-
     { title: "Product", field: "product", hozAlign: "center", editor: true },
     { title: "Price", field: "price", hozAlign: "left" },
     { title: "Quantity", field: "quantity", responsive: 1 },
@@ -102,7 +120,7 @@ const TabulatorGrid = () => {
         <ReactTabulator
           ref={tableRef}
           options={options}
-          data={list}
+          data={list.concat(newData)}
           columns={columns}
         />
         <button
@@ -116,6 +134,12 @@ const TabulatorGrid = () => {
           onClick={handleExportXLSX}
         >
           Export as XLSX
+        </button>
+        <button
+          style={{ backgroundColor: "white", width: 150, borderRadius: 10 }}
+          onClick={handleAddData}
+        >
+          Add Data
         </button>
       </div>
     </>
