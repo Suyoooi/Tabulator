@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
-import axios from "axios";
 import { ReactTabulator } from "react-tabulator";
 import "react-tabulator/lib/styles.css";
 
