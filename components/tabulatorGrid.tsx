@@ -15,6 +15,7 @@ const TabulatorGrid = () => {
     }[]
   >([]);
 
+  // csv 형식으로 저장
   const handleExportCSV = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
@@ -22,6 +23,7 @@ const TabulatorGrid = () => {
     }
   };
 
+  // xlsx 형식으로 저장
   const handleExportXLSX = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
