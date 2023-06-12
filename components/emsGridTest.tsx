@@ -9,33 +9,13 @@ interface TableDataItem {
   emsQueNm: string;
   collectDate: string;
   srvrAlias: string;
-  pendMsgCnt: string;
+  fabLocCd: string;
   fabCd: string;
 }
 
 const EmsGridTest = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [tableData, setTableData] = useState<TableDataItem[]>([]);
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await axios.post("/api/v1/tibco/ems/get/queue", {
-  //       data_name: "",
-  //       ems_server_name: "",
-  //       fab_cd: "D11",
-  //       fab_loc_cd: "이천",
-  //       st_dt: "2023-04-28T01:00:19.248Z",
-  //       en_dt: "2023-05-30T17:32:20.000Z",
-  //       scroll_size: 100,
-  //     });
-  //     setTableData(response.data);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   fetchData();
-  // }, []);
 
   // csv 형식으로 저장
   const handleExportCSV = () => {
@@ -76,7 +56,7 @@ const EmsGridTest = () => {
       emsQueNm: "",
       collectDate: "",
       srvrAlias: "",
-      pendMsgCnt: "",
+      fabLocCd: "",
       fabCd: "",
     };
     const updatedData = [...tableData, newData];
@@ -98,8 +78,8 @@ const EmsGridTest = () => {
       editor: true,
     },
     {
-      title: "pendMsgCnt",
-      field: "pendMsgCnt",
+      title: "fabLocCd",
+      field: "fabLocCd",
       hozAlign: "center",
       editor: true,
     },
@@ -112,7 +92,7 @@ const EmsGridTest = () => {
       emsQueNm: "Suyeon",
       collectDate: "23",
       srvrAlias: "",
-      pendMsgCnt: "0",
+      fabLocCd: "0",
       fabCd: "D11",
     },
     {
@@ -120,7 +100,7 @@ const EmsGridTest = () => {
       emsQueNm: "Amily",
       collectDate: "1",
       srvrAlias: "14/05/1982",
-      pendMsgCnt: "0",
+      fabLocCd: "0",
       fabCd: "D11",
     },
     {
@@ -128,7 +108,7 @@ const EmsGridTest = () => {
       emsQueNm: "Christine",
       collectDate: "42",
       srvrAlias: "22/05/1982",
-      pendMsgCnt: "0",
+      fabLocCd: "0",
       fabCd: "D11",
     },
     {
@@ -136,7 +116,7 @@ const EmsGridTest = () => {
       emsQueNm: "Brendon",
       collectDate: "125",
       srvrAlias: "01/08/1980",
-      pendMsgCnt: "0",
+      fabLocCd: "0",
       fabCd: "D11",
     },
     {
@@ -144,7 +124,7 @@ const EmsGridTest = () => {
       emsQueNm: "Gana",
       collectDate: "16",
       srvrAlias: "31/01/1999",
-      pendMsgCnt: "0",
+      fabLocCd: "0",
       fabCd: "D11",
     },
   ];
