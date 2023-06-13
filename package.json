@@ -2,7 +2,6 @@
   "name": "export",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://192.168.10.9:38080",
   "scripts": {
     "dev": "next dev -p 38080",
     "build": "next build",
