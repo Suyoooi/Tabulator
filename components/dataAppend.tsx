@@ -62,8 +62,10 @@ const DataAppend = () => {
           pendMsgCnt: item.queue.pendMsgCnt,
         }));
 
-      // 새로운 데이터를 기존 데이터에 추가
+      // 새로운 데이터를 기존 데이터에 뒤에 추가
       setTableData((prevTableData) => [...prevTableData, ...jsonData]);
+
+      // 데이터 총 개수는 콘솔로 확인,,
       console.log(offset);
       console.log(limit);
     } catch (error) {
@@ -89,7 +91,7 @@ const DataAppend = () => {
       />
       <button
         style={{
-          backgroundColor: "lightgray",
+          backgroundColor: "lightPink",
           width: 150,
           borderRadius: 10,
           marginTop: 10,
