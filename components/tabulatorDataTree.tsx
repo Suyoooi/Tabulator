@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as XLSX from "xlsx";
 import { ReactTabulator } from "react-tabulator";
+import { CellComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
 
 interface TableDataItem {
@@ -26,12 +27,9 @@ const TabulatorDataTree = () => {
       hozAlign: "center",
       headerSort: false,
       cssClass: "text-center",
-      cellClick: function (cell: {
-        getRow: () => {
-          toggleSelect: { (): void; new (): any };
-        };
-      }) {
-        cell.getRow().toggleSelect();
+      cellClick: function (cell: CellComponent) {
+        const row = cell.getRow();
+        row.toggleSelect();
       },
     },
     { title: "emsQueNm", field: "emsQueNm", hozAlign: "center" },
