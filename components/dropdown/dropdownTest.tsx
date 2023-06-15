@@ -1,13 +1,13 @@
 import { useState } from "react";
 
-type Option = {
+interface Option {
   value: string;
   label: string;
-};
+}
 
-type DropdownProps = {
+interface DropdownProps {
   options: Option[];
-};
+}
 
 const DropdownTest: React.FC<DropdownProps> = ({ options }) => {
   const [selectedOption, setSelectedOption] = useState<Option | null>(null);
