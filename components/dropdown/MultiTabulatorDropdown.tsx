@@ -8,7 +8,7 @@ interface TableDataItem {
   server: string;
 }
 
-const SimpleTabulatorDropdown = () => {
+const MultiTabulatorDropdown = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [tableData, setTableData] = useState<TableDataItem[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
@@ -127,4 +127,4 @@ const SimpleTabulatorDropdown = () => {
   );
 };
 
-export default SimpleTabulatorDropdown;
+export default MultiTabulatorDropdown;
