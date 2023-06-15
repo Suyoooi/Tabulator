@@ -21,7 +21,7 @@ const TabulatorDataTree = () => {
   const columns = [
     {
       title: "",
-      width: 20,
+      width: 70,
       formatter: "rowSelection",
       titleFormatter: "rowSelection",
       hozAlign: "center",
@@ -116,6 +116,14 @@ const TabulatorDataTree = () => {
     setTableData(initialData);
   }, []);
 
+  // Tree와 Grouping 옵션 추가
+  const options = {
+    layout: "fitData",
+    dataTree: true,
+    dataTreeStartExpanded: true,
+    groupBy: "fabLocCd",
+  };
+
   return (
     <div>
       <div className="table-responsive">
@@ -123,6 +131,7 @@ const TabulatorDataTree = () => {
           ref={tableRef}
           data={tableData}
           columns={columns}
+          options={options}
           layout={"fitData"}
         />
       </div>
