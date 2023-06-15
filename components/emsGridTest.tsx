@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
-import * as XLSX from "xlsx";
 import { ReactTabulator } from "react-tabulator";
+import { CellComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
 
 interface TableDataItem {
@@ -20,18 +20,29 @@ const emsGridTest = () => {
   const columns = [
     {
       title: "",
-      width: 40,
+      width: 70,
       formatter: "rowSelection",
       titleFormatter: "rowSelection",
       hozAlign: "center",
       headerSort: false,
       cssClass: "text-center",
-      cellClick: function (cell: {
-        getRow: () => {
-          toggleSelect: { (): void; new (): any };
-        };
-      }) {
-        cell.getRow().toggleSelect();
+      cellClick: function (cell: CellComponent) {
+        const row = cell.getRow();
+        row.toggleSelect();
+
+        const table = tableRef.current?.table;
+        if (table) {
+          const selectedRows = table.getSelectedRows();
+          const children = row.getData()._children;
+          if (selectedRows.includes(row) && children) {
+            for (const child of children) {
+              const childRow = table.getRow(child.id);
+              if (childRow) {
+                table.selectRow(childRow);
+              }
+            }
+          }
+        }
       },
     },
     { title: "emsQueNm", field: "emsQueNm", hozAlign: "center" },
@@ -93,26 +104,11 @@ const emsGridTest = () => {
       srvrAlias: "31/01/1999",
       fabLocCd: "0",
       fabCd: "D11",
+      // 하위 메뉴
       _children: [
         {
-          title: "",
-          width: 40,
-          formatter: "rowSelection",
-          titleFormatter: "rowSelection",
-          hozAlign: "center",
-          headerSort: false,
-          cssClass: "text-center",
-          cellClick: function (cell: {
-            getRow: () => {
-              toggleSelect: { (): void; new (): any };
-            };
-          }) {
-            cell.getRow().toggleSelect();
-          },
-        },
-        {
           id: 6,
-          emsQueNm: "Gana",
+          emsQueNm: "Child1",
           collectDate: "16",
           srvrAlias: "31/01/1999",
           fabLocCd: "0",
@@ -120,7 +116,7 @@ const emsGridTest = () => {
         },
         {
           id: 7,
-          emsQueNm: "Gana",
+          emsQueNm: "Child2",
           collectDate: "16",
           srvrAlias: "31/01/1999",
           fabLocCd: "0",
