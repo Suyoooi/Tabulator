@@ -118,10 +118,21 @@ const SingleTabulatorDropdown = () => {
             layout={"fitData"}
           />
           <div>
-            <button onClick={handleConfirm}>Confirm</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button
+              style={{
+                backgroundColor: "pink",
+                borderRadius: 10,
+                width: 80,
+              }}
+              onClick={handleConfirm}
+            >
+              Confirm
+            </button>
+            <button onClick={() => setSelectedData([])}>Cancel</button>
           </div>
         </div>
+      ) : (
+        <div></div>
       )}
     </div>
   );
