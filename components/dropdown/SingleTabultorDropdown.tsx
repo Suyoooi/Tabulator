@@ -95,12 +95,16 @@ const SingleTabulatorDropdown = () => {
 
   return (
     <div>
-      <select onClick={handleSelect}>
-        <option value="" disabled hidden>
-          Select
-        </option>
-      </select>
-      {dropdownOpen && (
+      {/* === 입력 창 === */}
+      <div
+        onClick={handleDropdownVisible}
+        style={{ backgroundColor: "white", width: 200, cursor: "pointer" }}
+      >
+        {selectedData.length > 0
+          ? `${selectedServerNames[0]}외 ${selectedData.length}건 `
+          : "ems server 선택"}
+      </div>
+      {dropdownMenu ? (
         <div style={{ width: 200 }}>
           <div>
             <input
