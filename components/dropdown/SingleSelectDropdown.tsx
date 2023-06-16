@@ -17,6 +17,7 @@ const SingleSelectDropdown: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
 
+  // 검색기능
   const handleSearch = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
