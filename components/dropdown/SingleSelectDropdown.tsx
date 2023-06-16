@@ -4,16 +4,17 @@ import React, { useState, ChangeEvent } from "react";
 interface Server {
   id: number;
   name: string;
+  value: string;
 }
 
 const serverList: Server[] = [
-  { id: 1, name: "EMS1" },
-  { id: 2, name: "EMS2" },
-  { id: 3, name: "EMS3" },
-  { id: 4, name: "EMS4" },
+  { id: 1, name: "EMS1", value: "EMS1" },
+  { id: 2, name: "EMS2", value: "EMS2" },
+  { id: 3, name: "EMS3", value: "EMS3" },
+  { id: 4, name: "EMS4", value: "EMS4" },
 ];
 
-const SingleSelectDropdown: React.FC = () => {
+const SingleSelectDropdown = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
 
