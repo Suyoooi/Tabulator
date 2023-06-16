@@ -18,35 +18,37 @@ const OptionList: Option[] = [
 ];
 
 const SimpleDropdown: React.FC<DropdownProps> = ({ options }) => {
-  const [selectedOption, setSelectedOption] = useState<Option | null>(null);
+  const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
   const [dropdownMenu, setDropdownMenu] = useState(false);
 
+  //   선택한 서버에 대한 변수
+  const selectedServerNames = selectedOptions.map((option) => option.name);
+  const selectedServerCount = selectedOptions.length;
+
   const handleSelectOption = (option: Option) => {
-    setSelectedOption(option);
-  };
-
-  const handleOptionChange = (value: string) => {
-    const selected = options.find((option) => option.value === value);
-    setSelectedOption(selected || null);
-  };
-
-  const handleCheckboxChange = (value: string) => {
-    const selected = options.find((option) => option.value === value);
-    if (selected) {
-      if (selectedOption?.value === value) {
-        setSelectedOption(null);
-      } else {
-        setSelectedOption(selected);
-      }
+    const isSelected = selectedOptions.some(
+      (selected) => selected.id === option.id
+    );
+    if (isSelected) {
+      setSelectedOptions(
+        selectedOptions.filter((selected) => selected.id !== option.id)
+      );
+    } else {
+      setSelectedOptions([...selectedOptions, option]);
     }
   };
 
+  // 데이터 확인용 alert 추가
   const handleConfirm = () => {
-    // 선택한 서버를 SelectBox에 표시하거나 다른 액션 수행
-    const selectedServerName = selectedOption
-      ? selectedOption.name
-      : "No server selected";
-    alert(`${selectedServerName}를 선택했습니다`);
+    if (selectedServerCount > 0) {
+      alert(
+        `서버 ${selectedServerCount}건을 선택했습니다. 선택한 서버: ${selectedServerNames.join(
+          ", "
+        )}`
+      );
+    } else {
+      alert("No servers selected");
+    }
     setDropdownMenu(false);
   };
 
@@ -57,42 +59,36 @@ const SimpleDropdown: React.FC<DropdownProps> = ({ options }) => {
   return (
     <>
       <div>
-        {/* <select
-              value={selectedOption?.value || ""}
-              onChange={(e) => handleOptionChange(e.target.value)}
-              onClick={handleDropdownVisible}
-            >
-              <option value="" disabled hidden>
-                ==ems==
-              </option>
-              {OptionList.map((option) => (
-                <option disabled hidden key={option.value} value={option.value}>
-                  {option.name}
-                </option>
-              ))}
-            </select> */}
+        {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
           style={{ backgroundColor: "white", width: 200, cursor: "pointer" }}
         >
-          ems server를 선택해주세요
+          {selectedOptions.length > 0
+            ? `${selectedServerNames[0]}외
+             ${selectedOptions.length}건 `
+            : "ems server 선택"}
         </div>
         <div>
           <div>
             {dropdownMenu ? (
               <div>
+                {/* === 드롭 다운 메뉴 === */}
                 {OptionList.map((option) => (
                   <div key={option.value}>
                     <label>
                       <input
                         type="checkbox"
-                        checked={selectedOption?.id === option.id}
+                        checked={selectedOptions.some(
+                          (selected) => selected.id === option.id
+                        )}
                         onChange={() => handleSelectOption(option)}
                       />
                       {option.name}
                     </label>
                   </div>
                 ))}
+                {/* === 확인/취소 버튼 === */}
                 <div>
                   <button
                     style={{
@@ -110,7 +106,7 @@ const SimpleDropdown: React.FC<DropdownProps> = ({ options }) => {
                       borderRadius: 10,
                       width: 80,
                     }}
-                    onClick={() => setSelectedOption(null)}
+                    onClick={() => setSelectedOptions([])}
                   >
                     all reset
                   </button>
