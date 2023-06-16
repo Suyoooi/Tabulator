@@ -54,6 +54,7 @@ const DropdownTest: React.FC<DropdownProps> = ({ options }) => {
             ))}
         </select>
       </div>
+      {/* 검색 기능 */}
       <div>
         <input
           type="text"
