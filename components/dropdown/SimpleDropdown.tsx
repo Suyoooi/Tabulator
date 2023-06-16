@@ -6,10 +6,6 @@ interface Option {
   value: string;
 }
 
-interface DropdownProps {
-  options: Option[];
-}
-
 const OptionList: Option[] = [
   { id: 1, name: "ems server1", value: "ems server1" },
   { id: 2, name: "ems server2", value: "ems server2" },
@@ -17,7 +13,7 @@ const OptionList: Option[] = [
   { id: 4, name: "ems server4", value: "ems server4" },
 ];
 
-const SimpleDropdown: React.FC<DropdownProps> = ({ options }) => {
+const SimpleDropdown = () => {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
   const [dropdownMenu, setDropdownMenu] = useState(false);
 
