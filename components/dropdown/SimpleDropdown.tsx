@@ -11,6 +11,10 @@ const OptionList: Option[] = [
   { id: 2, name: "ems server2", value: "ems server2" },
   { id: 3, name: "ems server3", value: "ems server3" },
   { id: 4, name: "ems server4", value: "ems server4" },
+  { id: 5, name: "ems server5", value: "ems server5" },
+  { id: 6, name: "ems server6", value: "ems server6" },
+  { id: 7, name: "ems server7", value: "ems server7" },
+  { id: 8, name: "ems server8", value: "ems server8" },
 ];
 
 const SimpleDropdown = () => {
@@ -68,7 +72,7 @@ const SimpleDropdown = () => {
 
   return (
     <>
-      <div style={{ zIndex: 10 }}>
+      <div>
         {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
