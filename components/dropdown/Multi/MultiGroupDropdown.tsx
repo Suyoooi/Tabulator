@@ -149,6 +149,8 @@ const MultiGroupDropdown = () => {
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
       : "=== EMS ===";
 
+  const selectedOptionName =
+    selectedData.length === 1 ? selectedData[0].value : "";
   return (
     <div style={{ zIndex: 10 }}>
       <div
@@ -160,7 +162,7 @@ const MultiGroupDropdown = () => {
           cursor: "pointer",
         }}
       >
-        {dropdownText}
+        {selectedData.length === 1 ? selectedOptionName : dropdownText}
       </div>
       {dropdownMenu ? (
         <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
