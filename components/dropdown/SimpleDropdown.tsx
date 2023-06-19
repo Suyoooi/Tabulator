@@ -54,6 +54,14 @@ const SimpleDropdown = () => {
     setDropdownMenu(false);
   };
 
+  const placeholder =
+    selectedOptions.length > 0
+      ? `${selectedServerNames[0]}외 ${selectedOptions.length - 1}건`
+      : "=== EMS ===";
+
+  const selectedOptionName =
+    selectedOptions.length === 1 ? selectedOptions[0].name : "";
+
   const handleDropdownVisible = () => {
     setDropdownMenu(!dropdownMenu);
   };
@@ -71,10 +79,7 @@ const SimpleDropdown = () => {
             cursor: "pointer",
           }}
         >
-          {selectedOptions.length > 0
-            ? `${selectedServerNames[0]}외
-             ${selectedOptions.length - 1}건 `
-            : "=== EMS ==="}
+          {selectedOptions.length === 1 ? selectedOptionName : placeholder}
         </div>
         <div>
           <div style={{ backgroundColor: "white" }}>
