@@ -12,6 +12,13 @@ interface TableDataItem {
 }
 
 const initialData: TableDataItem[] = [
+  //   {
+  //     id: 0,
+  //     server: "All",
+  //     alias: "all",
+  //     value: "All",
+  //     category: "All",
+  //   },
   {
     id: 1,
     server: "Group1",
@@ -53,9 +60,7 @@ const MultiGroupDropdown = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    "Category 1" // 기본 카테고리 선택
-  );
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
   console.log(selectedData);
@@ -91,6 +96,11 @@ const MultiGroupDropdown = () => {
         item.alias.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : initialData;
+
+  const filteredDataByCategory =
+    selectedCategory === "All"
+      ? filteredData
+      : filteredData.filter((item) => item.category === selectedCategory);
 
   const options = {
     layout: "fitColumns",
@@ -183,6 +193,17 @@ const MultiGroupDropdown = () => {
           </div>
           {/* 카테고리 버튼 */}
           <div>
+            <button
+              key="All"
+              onClick={() => handleSelectCategory("All")}
+              style={{
+                backgroundColor: selectedCategory === "All" ? "pink" : "white",
+                borderRadius: 10,
+                marginRight: 5,
+              }}
+            >
+              All
+            </button>
             {Array.from(new Set(initialData.map((item) => item.category))).map(
               (category) => (
                 <button
@@ -203,9 +224,7 @@ const MultiGroupDropdown = () => {
           {/* 선택한 카테고리에 해당하는 옵션 그리드 출력 */}
           <ReactTabulator
             ref={tableRef}
-            data={filteredData.filter(
-              (item) => item.category === selectedCategory
-            )}
+            data={filteredDataByCategory}
             columns={columns}
             options={options}
             layout={"fitData"}
