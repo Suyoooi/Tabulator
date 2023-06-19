@@ -150,7 +150,6 @@ const MultiGroupDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    setSelectedData([]);
     setSearchTerm("");
     setDropdownMenu(!dropdownMenu);
   };

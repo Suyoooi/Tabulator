@@ -118,7 +118,6 @@ const MultiTabulatorDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    setSelectedData([]);
     setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
     setDropdownMenu(!dropdownMenu);
   };
