@@ -67,7 +67,9 @@ const MultiGroupDropdown = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([
+    "All",
+  ]);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
   const selectedServerNames = selectedData.map((option) => option.server);
@@ -101,10 +103,9 @@ const MultiGroupDropdown = () => {
       )
     : initialData;
 
-  const filteredDataByCategory =
-    selectedCategory === "All"
-      ? filteredData
-      : filteredData.filter((item) => item.category === selectedCategory);
+  const filteredDataByCategory = selectedCategories.includes("All")
+    ? filteredData
+    : filteredData.filter((item) => selectedCategories.includes(item.category));
 
   const options = {
     layout: "fitColumns",
@@ -144,7 +145,6 @@ const MultiGroupDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    setSelectedData([]);
     setSearchTerm("");
     setDropdownMenu(!dropdownMenu);
   };
@@ -155,7 +155,17 @@ const MultiGroupDropdown = () => {
   };
 
   const handleSelectCategory = (category: string) => {
-    setSelectedCategory(category);
+    if (category === "All") {
+      setSelectedCategories(["All"]);
+    } else {
+      const updatedCategories = selectedCategories.includes("All")
+        ? [category]
+        : selectedCategories.includes(category)
+        ? selectedCategories.filter((c) => c !== category)
+        : [...selectedCategories, category];
+
+      setSelectedCategories(updatedCategories);
+    }
   };
 
   const dropdownText =
@@ -185,7 +195,7 @@ const MultiGroupDropdown = () => {
         style={{
           position: "absolute",
           backgroundColor: "#E5E5E5",
-          width: 300,
+          width: 200,
           zIndex: 100,
         }}
       >
@@ -213,8 +223,9 @@ const MultiGroupDropdown = () => {
                 style={{
                   paddingLeft: 4,
                   paddingRight: 4,
-                  backgroundColor:
-                    selectedCategory === "All" ? "lightGrey" : "white",
+                  backgroundColor: selectedCategories.includes("All")
+                    ? "lightGrey"
+                    : "white",
                   borderRadius: 10,
                   marginRight: 5,
                 }}
@@ -228,8 +239,9 @@ const MultiGroupDropdown = () => {
                   key={category}
                   onClick={() => handleSelectCategory(category)}
                   style={{
-                    backgroundColor:
-                      selectedCategory === category ? "lightGrey" : "white",
+                    backgroundColor: selectedCategories.includes(category)
+                      ? "lightGrey"
+                      : "white",
                     borderRadius: 10,
                     marginRight: 5,
                   }}
@@ -238,17 +250,27 @@ const MultiGroupDropdown = () => {
                 </button>
               ))}
             </div>
-            {filteredDataByCategory.length > 0 ? (
-              <ReactTabulator
-                ref={tableRef}
-                data={filteredDataByCategory}
-                columns={columns}
-                options={options}
-                layout={"fitData"}
-              />
-            ) : (
-              <div>Data가 존재하지 않습니다.</div>
-            )}
+            <div
+              style={{
+                width: 200,
+                height: 200,
+                overflow: "scroll",
+                overflowX: "hidden",
+                backgroundColor: "#E5E5E5",
+              }}
+            >
+              {filteredDataByCategory.length > 0 ? (
+                <ReactTabulator
+                  ref={tableRef}
+                  data={filteredDataByCategory}
+                  columns={columns}
+                  options={options}
+                  layout={"fitData"}
+                />
+              ) : (
+                <div>Data가 존재하지 않습니다.</div>
+              )}
+            </div>
             <div>
               {/* === 확인/취소 버튼 === */}
               <button
