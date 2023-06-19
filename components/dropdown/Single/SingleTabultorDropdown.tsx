@@ -142,10 +142,13 @@ const SingleTabulatorDropdown = () => {
     setDropdownMenu(false);
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+    tableRef.current?.table.clearFilter();
+  };
+
   const dropdownText =
-    selectedData.length > 0
-      ? `${selectedServerNames[0]}`
-      : "EMS server를 선택하세요";
+    selectedData.length > 0 ? `${selectedServerNames[0]}` : "=== EMS ===";
 
   return (
     <div style={{ zIndex: 10 }}>
@@ -162,15 +165,21 @@ const SingleTabulatorDropdown = () => {
         {dropdownText}
       </div>
       {dropdownMenu ? (
-        <div style={{ width: 200, backgroundColor: "black" }}>
+        <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
             <input
-              style={{ color: "black" }}
+              style={{ color: "black", width: 150 }}
               type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
             />
+            <button
+              onClick={clearSearch}
+              style={{ paddingLeft: 4, paddingRight: 4 }}
+            >
+              Clear
+            </button>
           </div>
           <ReactTabulator
             ref={tableRef}
