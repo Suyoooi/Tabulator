@@ -21,6 +21,8 @@ const SimpleDropdown = () => {
   const selectedServerNames = selectedOptions.map((option) => option.name);
   const selectedServerCount = selectedOptions.length;
 
+  console.log(selectedOptions);
+
   const handleSelectOption = (option: Option) => {
     const isSelected = selectedOptions.some(
       (selected) => selected.id === option.id
