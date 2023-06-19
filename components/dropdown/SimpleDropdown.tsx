@@ -82,24 +82,43 @@ const SimpleDropdown = () => {
           {selectedOptions.length === 1 ? selectedOptionName : placeholder}
         </div>
         <div>
-          <div style={{ backgroundColor: "white" }}>
+          <div
+            style={{
+              position: "absolute",
+              backgroundColor: "white",
+              width: 270,
+              zIndex: 100,
+            }}
+          >
             {dropdownMenu ? (
               <div>
-                {/* === 드롭 다운 메뉴 === */}
-                {OptionList.map((option) => (
-                  <div key={option.value}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions.some(
-                          (selected) => selected.id === option.id
-                        )}
-                        onChange={() => handleSelectOption(option)}
-                      />
-                      {option.name}
-                    </label>
-                  </div>
-                ))}
+                <div
+                  style={{
+                    display: "flex",
+                    width: 270,
+                    height: 100,
+                    overflow: "scroll",
+                    flexWrap: "wrap",
+                    alignContent: "start",
+                  }}
+                >
+                  {/* === 드롭 다운 메뉴 === */}
+                  {OptionList.map((option) => (
+                    <div style={{ width: 120, height: 25 }} key={option.value}>
+                      <label>
+                        <input
+                          type="checkbox"
+                          checked={selectedOptions.some(
+                            (selected) => selected.id === option.id
+                          )}
+                          onChange={() => handleSelectOption(option)}
+                        />
+                        {option.name}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
                 {/* === 확인/취소 버튼 === */}
                 <div>
                   <button
