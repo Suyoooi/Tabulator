@@ -132,7 +132,6 @@ const SingleTabulatorDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    // setSelectedData([]);
     setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
     setDropdownMenu(!dropdownMenu);
   };
@@ -181,13 +180,17 @@ const SingleTabulatorDropdown = () => {
               Clear
             </button>
           </div>
-          <ReactTabulator
-            ref={tableRef}
-            data={filteredData}
-            columns={columns}
-            options={options}
-            layout={"fitData"}
-          />
+          {filteredData.length > 0 ? (
+            <ReactTabulator
+              ref={tableRef}
+              data={filteredData}
+              columns={columns}
+              options={options}
+              layout={"fitData"}
+            />
+          ) : (
+            <div>Data가 존재하지 않습니다.</div>
+          )}
           <div>
             <button
               style={{
