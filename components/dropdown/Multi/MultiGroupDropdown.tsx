@@ -170,7 +170,7 @@ const MultiGroupDropdown = () => {
       : "EMS server를 선택하세요";
 
   return (
-    <div>
+    <div style={{ zIndex: 10 }}>
       {/* 입력 창 */}
       <div
         onClick={handleDropdownVisible}
@@ -179,17 +179,27 @@ const MultiGroupDropdown = () => {
         {dropdownText}
       </div>
       {dropdownMenu ? (
-        <div style={{ width: 200 }}>
+        <div style={{ width: 200, backgroundColor: "black" }}>
           <div>
             <input
-              style={{ color: "black" }}
+              style={{ color: "black", width: 110 }}
               type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button onClick={handleSearch}>Search</button>
-            <button onClick={clearSearch}>Clear</button>
+            <button
+              onClick={handleSearch}
+              style={{ paddingLeft: 4, paddingRight: 4 }}
+            >
+              Search
+            </button>
+            <button
+              onClick={clearSearch}
+              style={{ paddingLeft: 4, paddingRight: 4 }}
+            >
+              Clear
+            </button>
           </div>
           {/* 카테고리 버튼 */}
           <div>
@@ -197,7 +207,10 @@ const MultiGroupDropdown = () => {
               key="All"
               onClick={() => handleSelectCategory("All")}
               style={{
-                backgroundColor: selectedCategory === "All" ? "pink" : "white",
+                paddingLeft: 4,
+                paddingRight: 4,
+                backgroundColor:
+                  selectedCategory === "All" ? "lightGrey" : "white",
                 borderRadius: 10,
                 marginRight: 5,
               }}
@@ -232,15 +245,24 @@ const MultiGroupDropdown = () => {
           <div>
             <button
               style={{
-                backgroundColor: "pink",
+                backgroundColor: "lightGrey",
                 borderRadius: 10,
-                width: 80,
+                width: 60,
               }}
               onClick={handleConfirm}
             >
               Confirm
             </button>
-            <button onClick={handleCancelClick}>Cancel</button>
+            <button
+              style={{
+                backgroundColor: "lightGrey",
+                borderRadius: 10,
+                width: 60,
+              }}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
