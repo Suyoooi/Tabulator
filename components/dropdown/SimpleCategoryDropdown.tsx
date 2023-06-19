@@ -23,6 +23,24 @@ const OptionList: Option[] = [
     value: "ems server10",
     category: "Category 5",
   },
+  {
+    id: 11,
+    name: "ems server11",
+    value: "ems server11",
+    category: "Category 5",
+  },
+  {
+    id: 12,
+    name: "ems server12",
+    value: "ems server12",
+    category: "Category 5",
+  },
+  {
+    id: 13,
+    name: "ems server13",
+    value: "ems server13",
+    category: "Category 5",
+  },
 ];
 
 const SimpleCategoryDropdown = () => {
