@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { ReactTabulator } from "react-tabulator";
 import { CellComponent, RowComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
