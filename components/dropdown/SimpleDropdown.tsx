@@ -36,6 +36,10 @@ const SimpleDropdown = () => {
     }
   };
 
+  const handleAllApply = () => {
+    setSelectedOptions(OptionList);
+  };
+
   // 데이터 확인용 alert 추가
   const handleConfirm = () => {
     if (selectedServerCount > 0) {
@@ -95,6 +99,16 @@ const SimpleDropdown = () => {
                       width: 80,
                     }}
                     onClick={handleConfirm}
+                  >
+                    확인
+                  </button>
+                  <button
+                    style={{
+                      backgroundColor: "pink",
+                      borderRadius: 10,
+                      width: 80,
+                    }}
+                    onClick={handleAllApply}
                   >
                     all apply
                   </button>
