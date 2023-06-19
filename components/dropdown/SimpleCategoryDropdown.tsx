@@ -153,35 +153,40 @@ const SimpleCategoryDropdown = () => {
                   </button>
                 ))}
               </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  width: 300,
-                  height: 150,
-                  overflow: "scroll",
-                  flexWrap: "wrap",
-                  alignContent: "start",
-                }}
-              >
-                {OptionList.filter(
-                  (option) =>
-                    selectedCategory === "All" ||
-                    option.category === selectedCategory
-                ).map((option) => (
-                  <div style={{ width: 120, height: 25 }} key={option.id}>
-                    <label>
-                      <input
-                        type="checkbox"
-                        checked={selectedOptions.some(
-                          (selected) => selected.id === option.id
-                        )}
-                        onChange={() => handleSelectOption(option)}
-                      />
-                      {option.name}
-                    </label>
+              <div>
+                {OptionList.length > 0 ? (
+                  <div
+                    style={{
+                      display: "flex",
+                      width: 300,
+                      height: 150,
+                      overflow: "scroll",
+                      flexWrap: "wrap",
+                      alignContent: "start",
+                    }}
+                  >
+                    {OptionList.filter(
+                      (option) =>
+                        selectedCategory === "All" ||
+                        option.category === selectedCategory
+                    ).map((option) => (
+                      <div style={{ width: 120, height: 25 }} key={option.id}>
+                        <label>
+                          <input
+                            type="checkbox"
+                            checked={selectedOptions.some(
+                              (selected) => selected.id === option.id
+                            )}
+                            onChange={() => handleSelectOption(option)}
+                          />
+                          {option.name}
+                        </label>
+                      </div>
+                    ))}
                   </div>
-                ))}
+                ) : (
+                  <div>Data가 존재하지 않습니다.</div>
+                )}
               </div>
               {/* === 확인/취소 버튼 === */}
               <div>
