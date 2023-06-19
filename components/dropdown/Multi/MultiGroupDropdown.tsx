@@ -151,8 +151,9 @@ const MultiGroupDropdown = () => {
 
   const selectedOptionName =
     selectedData.length === 1 ? selectedData[0].value : "";
+
   return (
-    <div style={{ zIndex: 10 }}>
+    <div>
       <div
         onClick={handleDropdownVisible}
         style={{
@@ -164,92 +165,101 @@ const MultiGroupDropdown = () => {
       >
         {selectedData.length === 1 ? selectedOptionName : dropdownText}
       </div>
-      {dropdownMenu ? (
-        <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
-          <div>
-            <input
-              style={{ color: "black", width: 150 }}
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <button
-              onClick={clearSearch}
-              style={{ paddingLeft: 4, paddingRight: 4 }}
-            >
-              Clear
-            </button>
-          </div>
-          <div>
-            <button
-              key="All"
-              onClick={() => handleSelectCategory("All")}
-              style={{
-                paddingLeft: 4,
-                paddingRight: 4,
-                backgroundColor:
-                  selectedCategory === "All" ? "lightGrey" : "white",
-                borderRadius: 10,
-                marginRight: 5,
-              }}
-            >
-              All
-            </button>
-            {Array.from(new Set(initialData.map((item) => item.category))).map(
-              (category) => (
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "#E5E5E5",
+          width: 300,
+          zIndex: 100,
+        }}
+      >
+        {dropdownMenu ? (
+          <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
+            <div>
+              <input
+                style={{ color: "black", width: 150 }}
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button
+                onClick={clearSearch}
+                style={{ paddingLeft: 4, paddingRight: 4 }}
+              >
+                Clear
+              </button>
+            </div>
+            <div>
+              <button
+                key="All"
+                onClick={() => handleSelectCategory("All")}
+                style={{
+                  paddingLeft: 4,
+                  paddingRight: 4,
+                  backgroundColor:
+                    selectedCategory === "All" ? "lightGrey" : "white",
+                  borderRadius: 10,
+                  marginRight: 5,
+                }}
+              >
+                All
+              </button>
+              {Array.from(
+                new Set(initialData.map((item) => item.category))
+              ).map((category) => (
                 <button
                   key={category}
                   onClick={() => handleSelectCategory(category)}
                   style={{
                     backgroundColor:
-                      selectedCategory === category ? "pink" : "white",
+                      selectedCategory === category ? "lightGrey" : "white",
                     borderRadius: 10,
                     marginRight: 5,
                   }}
                 >
                   {category}
                 </button>
-              )
+              ))}
+            </div>
+            {filteredDataByCategory.length > 0 ? (
+              <ReactTabulator
+                ref={tableRef}
+                data={filteredDataByCategory}
+                columns={columns}
+                options={options}
+                layout={"fitData"}
+              />
+            ) : (
+              <div>Data가 존재하지 않습니다.</div>
             )}
+            <div>
+              <button
+                style={{
+                  backgroundColor: "lightGrey",
+                  borderRadius: 10,
+                  width: 60,
+                }}
+                onClick={handleConfirm}
+              >
+                Confirm
+              </button>
+              <button
+                style={{
+                  backgroundColor: "lightGrey",
+                  borderRadius: 10,
+                  width: 60,
+                }}
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-          {filteredDataByCategory.length > 0 ? (
-            <ReactTabulator
-              ref={tableRef}
-              data={filteredDataByCategory}
-              columns={columns}
-              options={options}
-              layout={"fitData"}
-            />
-          ) : (
-            <div>Data가 존재하지 않습니다.</div>
-          )}
-          <div>
-            <button
-              style={{
-                backgroundColor: "lightGrey",
-                borderRadius: 10,
-                width: 60,
-              }}
-              onClick={handleConfirm}
-            >
-              Confirm
-            </button>
-            <button
-              style={{
-                backgroundColor: "lightGrey",
-                borderRadius: 10,
-                width: 60,
-              }}
-              onClick={handleCancelClick}
-            >
-              Cancel
-            </button>
-          </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };
