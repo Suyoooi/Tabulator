@@ -60,13 +60,14 @@ const SimpleDropdown = () => {
 
   return (
     <>
-      <div>
+      <div style={{ zIndex: 10 }}>
         {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
           style={{
-            backgroundColor: "white",
-            width: 200,
+            backgroundColor: "lightGrey",
+            width: 150,
+            height: 20,
             cursor: "pointer",
           }}
         >
@@ -76,7 +77,7 @@ const SimpleDropdown = () => {
             : "ems server 선택"}
         </div>
         <div>
-          <div>
+          <div style={{ backgroundColor: "white" }}>
             {dropdownMenu ? (
               <div>
                 {/* === 드롭 다운 메뉴 === */}
@@ -98,9 +99,9 @@ const SimpleDropdown = () => {
                 <div>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={handleConfirm}
                   >
@@ -108,9 +109,9 @@ const SimpleDropdown = () => {
                   </button>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={handleAllApply}
                   >
@@ -118,9 +119,9 @@ const SimpleDropdown = () => {
                   </button>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={() => setSelectedOptions([])}
                   >
