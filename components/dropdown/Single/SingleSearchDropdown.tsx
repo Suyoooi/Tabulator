@@ -14,7 +14,7 @@ const serverList: Server[] = [
   { id: 4, name: "EMS4", value: "EMS4" },
 ];
 
-const SingleSelectDropdown = () => {
+const SingleSearchDropdown = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedServer, setSelectedServer] = useState<Server | null>(null);
 
@@ -68,4 +68,4 @@ const SingleSelectDropdown = () => {
   );
 };
 
-export default SingleSelectDropdown;
+export default SingleSearchDropdown;
