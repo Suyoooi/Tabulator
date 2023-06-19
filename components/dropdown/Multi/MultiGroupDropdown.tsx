@@ -169,12 +169,12 @@ const MultiGroupDropdown = () => {
   };
 
   const dropdownText =
-    selectedData.length > 0
-      ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
+    selectedServerCount > 0
+      ? `${selectedServerNames[0]}외 ${selectedServerCount - 1}건`
       : "=== EMS ===";
 
   const selectedOptionName =
-    selectedData.length === 1 ? selectedData[0].value : "";
+    selectedServerCount === 1 ? selectedData[0].value : "";
 
   return (
     <div>
@@ -188,7 +188,7 @@ const MultiGroupDropdown = () => {
           cursor: "pointer",
         }}
       >
-        {selectedData.length === 1 ? selectedOptionName : dropdownText}
+        {selectedServerCount === 1 ? selectedOptionName : dropdownText}
       </div>
       {/* === 드롭 다운 메뉴 === */}
       <div
