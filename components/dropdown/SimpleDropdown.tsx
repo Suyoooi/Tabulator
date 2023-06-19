@@ -68,7 +68,7 @@ const SimpleDropdown = () => {
         >
           {selectedOptions.length > 0
             ? `${selectedServerNames[0]}외
-             ${selectedOptions.length}건 `
+             ${selectedOptions.length - 1}건 `
             : "ems server 선택"}
         </div>
         <div>
