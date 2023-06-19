@@ -109,13 +109,13 @@ const MultiGroupDropdown = () => {
     movableColumns: true,
   };
 
-  const handleSearch = () => {
-    if (searchTerm) {
-      tableRef.current?.table.setFilter("server", "like", searchTerm);
-    } else {
-      tableRef.current?.table.clearFilter();
-    }
-  };
+  // const handleSearch = () => {
+  //   if (searchTerm) {
+  //     tableRef.current?.table.setFilter("server", "like", searchTerm);
+  //   } else {
+  //     tableRef.current?.table.clearFilter();
+  //   }
+  // };
 
   const clearSearch = () => {
     setSearchTerm("");
@@ -167,7 +167,7 @@ const MultiGroupDropdown = () => {
   const dropdownText =
     selectedData.length > 0
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
-      : "EMS server를 선택하세요";
+      : "=== EMS ===";
 
   return (
     <div style={{ zIndex: 10 }}>
@@ -184,7 +184,7 @@ const MultiGroupDropdown = () => {
         {dropdownText}
       </div>
       {dropdownMenu ? (
-        <div style={{ width: 200, backgroundColor: "black" }}>
+        <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
             <input
               style={{ color: "black", width: 110 }}
@@ -193,12 +193,12 @@ const MultiGroupDropdown = () => {
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            <button
+            {/* <button
               onClick={handleSearch}
               style={{ paddingLeft: 4, paddingRight: 4 }}
             >
               Search
-            </button>
+            </button> */}
             <button
               onClick={clearSearch}
               style={{ paddingLeft: 4, paddingRight: 4 }}

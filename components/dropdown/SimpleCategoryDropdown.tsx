@@ -86,7 +86,7 @@ const SimpleCategoryDropdown = () => {
   const placeholder =
     selectedOptions.length > 0
       ? `${selectedServerNames[0]}외 ${selectedOptions.length - 1}건`
-      : "EMS server를 선택하세요";
+      : "=== EMS ===";
 
   return (
     <>

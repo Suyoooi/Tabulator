@@ -131,7 +131,7 @@ const MultiTabulatorDropdown = () => {
   const dropdownText =
     selectedData.length > 0
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
-      : "EMS server를 선택하세요";
+      : "=== EMS ===";
 
   return (
     <div style={{ zIndex: 10 }}>
@@ -148,7 +148,7 @@ const MultiTabulatorDropdown = () => {
         {dropdownText}
       </div>
       {dropdownMenu ? (
-        <div style={{ width: 200, backgroundColor: "black" }}>
+        <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
             <input
               style={{ color: "black" }}

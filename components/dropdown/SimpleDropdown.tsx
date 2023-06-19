@@ -74,7 +74,7 @@ const SimpleDropdown = () => {
           {selectedOptions.length > 0
             ? `${selectedServerNames[0]}외
              ${selectedOptions.length - 1}건 `
-            : "ems server 선택"}
+            : "=== EMS ==="}
         </div>
         <div>
           <div style={{ backgroundColor: "white" }}>
@@ -111,7 +111,7 @@ const SimpleDropdown = () => {
                     style={{
                       backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 60,
+                      width: 70,
                     }}
                     onClick={handleAllApply}
                   >
