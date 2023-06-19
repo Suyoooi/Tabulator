@@ -102,6 +102,7 @@ const SimpleDropdown = () => {
                     width: 270,
                     height: 100,
                     overflow: "scroll",
+                    overflowX: "hidden",
                     flexWrap: "wrap",
                     alignContent: "start",
                   }}
