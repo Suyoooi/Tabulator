@@ -132,7 +132,7 @@ const SingleTabulatorDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
+    setSearchTerm("");
     setDropdownMenu(!dropdownMenu);
   };
 
@@ -163,6 +163,7 @@ const SingleTabulatorDropdown = () => {
       >
         {dropdownText}
       </div>
+      {/* === 드롭 다운 메뉴 === */}
       {dropdownMenu ? (
         <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
@@ -191,6 +192,7 @@ const SingleTabulatorDropdown = () => {
           ) : (
             <div>Data가 존재하지 않습니다.</div>
           )}
+          {/* === 확인/취소 버튼 === */}
           <div>
             <button
               style={{
