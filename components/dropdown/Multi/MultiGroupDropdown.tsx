@@ -12,13 +12,6 @@ interface TableDataItem {
 }
 
 const initialData: TableDataItem[] = [
-  //   {
-  //     id: 0,
-  //     server: "All",
-  //     alias: "all",
-  //     value: "All",
-  //     category: "All",
-  //   },
   {
     id: 1,
     server: "Group1",
@@ -63,9 +56,6 @@ const MultiGroupDropdown = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
-  console.log(selectedData);
-
-  // 선택한 서버에 대한 변수
   const selectedServerNames = selectedData.map((option) => option.server);
   const selectedServerCount = selectedData.length;
 
@@ -84,7 +74,7 @@ const MultiGroupDropdown = () => {
       },
     },
     { title: "server", field: "server", hozAlign: "center" },
-    { title: "alias", field: "alias", hozAlign: "center" }, // Add this line
+    { title: "alias", field: "alias", hozAlign: "center" },
   ];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -108,14 +98,6 @@ const MultiGroupDropdown = () => {
     printVisibleRowsOnly: true,
     movableColumns: true,
   };
-
-  // const handleSearch = () => {
-  //   if (searchTerm) {
-  //     tableRef.current?.table.setFilter("server", "like", searchTerm);
-  //   } else {
-  //     tableRef.current?.table.clearFilter();
-  //   }
-  // };
 
   const clearSearch = () => {
     setSearchTerm("");
@@ -145,11 +127,10 @@ const MultiGroupDropdown = () => {
     }
 
     setDropdownMenu(false);
-
-    console.log(selectedData);
   };
 
   const handleDropdownVisible = () => {
+    setSelectedData([]);
     setSearchTerm("");
     setDropdownMenu(!dropdownMenu);
   };
@@ -170,7 +151,6 @@ const MultiGroupDropdown = () => {
 
   return (
     <div style={{ zIndex: 10 }}>
-      {/* 입력 창 */}
       <div
         onClick={handleDropdownVisible}
         style={{
@@ -186,18 +166,12 @@ const MultiGroupDropdown = () => {
         <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
             <input
-              style={{ color: "black", width: 110 }}
+              style={{ color: "black", width: 150 }}
               type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
             />
-            {/* <button
-              onClick={handleSearch}
-              style={{ paddingLeft: 4, paddingRight: 4 }}
-            >
-              Search
-            </button> */}
             <button
               onClick={clearSearch}
               style={{ paddingLeft: 4, paddingRight: 4 }}
@@ -205,7 +179,6 @@ const MultiGroupDropdown = () => {
               Clear
             </button>
           </div>
-          {/* 카테고리 버튼 */}
           <div>
             <button
               key="All"
@@ -238,14 +211,17 @@ const MultiGroupDropdown = () => {
               )
             )}
           </div>
-          {/* 선택한 카테고리에 해당하는 옵션 그리드 출력 */}
-          <ReactTabulator
-            ref={tableRef}
-            data={filteredDataByCategory}
-            columns={columns}
-            options={options}
-            layout={"fitData"}
-          />
+          {filteredDataByCategory.length > 0 ? (
+            <ReactTabulator
+              ref={tableRef}
+              data={filteredDataByCategory}
+              columns={columns}
+              options={options}
+              layout={"fitData"}
+            />
+          ) : (
+            <div>Data가 존재하지 않습니다.</div>
+          )}
           <div>
             <button
               style={{
