@@ -35,6 +35,16 @@ const initialData: TableDataItem[] = [
     server: "EMS5",
     value: "EMS5",
   },
+  {
+    id: 6,
+    server: "EMS6",
+    value: "EMS6",
+  },
+  {
+    id: 7,
+    server: "EMS7",
+    value: "EMS7",
+  },
 ];
 
 const MultiTabulatorDropdown = () => {
@@ -112,13 +122,11 @@ const MultiTabulatorDropdown = () => {
       alert("No servers selected");
     }
     setDropdownMenu(false);
-
-    // 상태 업데이트 이후에 선택한 데이터 출력
     console.log(selectedData);
   };
 
   const handleDropdownVisible = () => {
-    setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
+    setSearchTerm("");
     setDropdownMenu(!dropdownMenu);
   };
 
@@ -137,6 +145,9 @@ const MultiTabulatorDropdown = () => {
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
       : "=== EMS ===";
 
+  const selectedOptionName =
+    selectedData.length === 1 ? selectedData[0].value : "";
+
   return (
     <div style={{ zIndex: 10 }}>
       {/* === 입력 창 === */}
@@ -149,62 +160,82 @@ const MultiTabulatorDropdown = () => {
           cursor: "pointer",
         }}
       >
-        {dropdownText}
+        {selectedData.length === 1 ? selectedOptionName : dropdownText}
       </div>
-      {dropdownMenu ? (
-        <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
-          <div>
-            <input
-              style={{ color: "black", width: 150 }}
-              type="text"
-              placeholder="Search"
-              value={searchTerm}
-              onChange={handleSearchChange}
-            />
-            <button
-              onClick={clearSearch}
-              style={{ paddingLeft: 4, paddingRight: 4 }}
-            >
-              Clear
-            </button>
-          </div>
-          {filteredData.length > 0 ? (
-            <ReactTabulator
-              ref={tableRef}
-              data={filteredData}
-              columns={columns}
-              options={options}
-              layout={"fitData"}
-            />
-          ) : (
-            <div>Data가 존재하지 않습니다.</div>
-          )}
-          <div>
-            <button
+      {/* === 드롭 다운 메뉴 === */}
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "#E5E5E5",
+          width: 200,
+          zIndex: 100,
+        }}
+      >
+        {dropdownMenu ? (
+          <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
+            <div>
+              <input
+                style={{ color: "black", width: 150 }}
+                type="text"
+                placeholder="Search"
+                value={searchTerm}
+                onChange={handleSearchChange}
+              />
+              <button
+                onClick={clearSearch}
+                style={{ paddingLeft: 4, paddingRight: 4 }}
+              >
+                Clear
+              </button>
+            </div>
+            <div
               style={{
-                backgroundColor: "lightGrey",
-                borderRadius: 10,
-                width: 60,
+                width: 200,
+                height: 200,
+                overflow: "scroll",
+                overflowX: "hidden",
+                backgroundColor: "#E5E5E5",
               }}
-              onClick={handleConfirm}
             >
-              Confirm
-            </button>
-            <button
-              style={{
-                backgroundColor: "lightGrey",
-                borderRadius: 10,
-                width: 60,
-              }}
-              onClick={handleCancelClick}
-            >
-              Cancel
-            </button>
+              {filteredData.length > 0 ? (
+                <ReactTabulator
+                  ref={tableRef}
+                  data={filteredData}
+                  columns={columns}
+                  options={options}
+                  layout={"fitData"}
+                />
+              ) : (
+                <div>Data가 존재하지 않습니다.</div>
+              )}
+            </div>
+            <div>
+              <button
+                style={{
+                  backgroundColor: "lightGrey",
+                  borderRadius: 10,
+                  width: 60,
+                }}
+                onClick={handleConfirm}
+              >
+                Confirm
+              </button>
+              <button
+                style={{
+                  backgroundColor: "lightGrey",
+                  borderRadius: 10,
+                  width: 60,
+                }}
+                onClick={handleCancelClick}
+              >
+                Cancel
+              </button>
+            </div>
           </div>
-        </div>
-      ) : (
-        <div></div>
-      )}
+        ) : (
+          <div></div>
+        )}
+      </div>
     </div>
   );
 };
