@@ -166,7 +166,7 @@ const SimpleCategoryDropdown = () => {
                     selectedCategory === "All" ||
                     option.category === selectedCategory
                 ).map((option) => (
-                  <div key={option.id}>
+                  <div style={{ width: 120, height: 25 }} key={option.id}>
                     <label>
                       <input
                         type="checkbox"
