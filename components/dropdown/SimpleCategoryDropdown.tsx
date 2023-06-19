@@ -45,7 +45,7 @@ const OptionList: Option[] = [
 
 const SimpleCategoryDropdown = () => {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
 
@@ -71,7 +71,17 @@ const SimpleCategoryDropdown = () => {
   };
 
   const handleSelectCategory = (category: string) => {
-    setSelectedCategory(category);
+    if (category === "All") {
+      setSelectedCategories(["All"]);
+    } else {
+      const updatedCategories = selectedCategories.includes("All")
+        ? [category]
+        : selectedCategories.includes(category)
+        ? selectedCategories.filter((c) => c !== category)
+        : [...selectedCategories, category];
+
+      setSelectedCategories(updatedCategories);
+    }
   };
 
   const handleConfirm = () => {
@@ -92,10 +102,11 @@ const SimpleCategoryDropdown = () => {
   };
 
   const handleAllApply = () => {
-    const categoryOptions =
-      selectedCategory === "All"
-        ? OptionList
-        : OptionList.filter((option) => option.category === selectedCategory);
+    const categoryOptions = selectedCategories.includes("All")
+      ? OptionList
+      : OptionList.filter((option) =>
+          selectedCategories.includes(option.category)
+        );
     setSelectedOptions(categoryOptions);
   };
 
@@ -141,8 +152,9 @@ const SimpleCategoryDropdown = () => {
                     style={{
                       paddingLeft: 4,
                       paddingRight: 4,
-                      backgroundColor:
-                        selectedCategory === category ? "lightGrey" : "white",
+                      backgroundColor: selectedCategories.includes(category)
+                        ? "lightGrey"
+                        : "white",
                       borderRadius: 10,
                       marginRight: 5,
                       width: 90,
@@ -161,14 +173,15 @@ const SimpleCategoryDropdown = () => {
                       width: 300,
                       height: 150,
                       overflow: "scroll",
+                      overflowX: "hidden",
                       flexWrap: "wrap",
                       alignContent: "start",
                     }}
                   >
                     {OptionList.filter(
                       (option) =>
-                        selectedCategory === "All" ||
-                        option.category === selectedCategory
+                        selectedCategories.includes("All") ||
+                        selectedCategories.includes(option.category)
                     ).map((option) => (
                       <div style={{ width: 120, height: 25 }} key={option.id}>
                         <label>
@@ -216,7 +229,10 @@ const SimpleCategoryDropdown = () => {
                     borderRadius: 10,
                     width: 60,
                   }}
-                  onClick={() => setSelectedOptions([])}
+                  onClick={() => {
+                    setSelectedOptions([]);
+                    setSelectedCategories([]);
+                  }}
                 >
                   all reset
                 </button>
