@@ -45,7 +45,9 @@ const OptionList: Option[] = [
 
 const SimpleCategoryDropdown = () => {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
-  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([
+    "All",
+  ]);
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
 
