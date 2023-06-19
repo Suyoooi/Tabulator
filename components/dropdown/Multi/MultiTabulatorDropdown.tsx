@@ -134,16 +134,21 @@ const MultiTabulatorDropdown = () => {
       : "EMS server를 선택하세요";
 
   return (
-    <div>
+    <div style={{ zIndex: 10 }}>
       {/* === 입력 창 === */}
       <div
         onClick={handleDropdownVisible}
-        style={{ backgroundColor: "skyblue", width: 200, cursor: "pointer" }}
+        style={{
+          backgroundColor: "lightGrey",
+          width: 150,
+          height: 20,
+          cursor: "pointer",
+        }}
       >
         {dropdownText}
       </div>
       {dropdownMenu ? (
-        <div style={{ width: 200 }}>
+        <div style={{ width: 200, backgroundColor: "black" }}>
           <div>
             <input
               style={{ color: "black" }}
@@ -163,15 +168,24 @@ const MultiTabulatorDropdown = () => {
           <div>
             <button
               style={{
-                backgroundColor: "pink",
+                backgroundColor: "lightGrey",
                 borderRadius: 10,
-                width: 80,
+                width: 60,
               }}
               onClick={handleConfirm}
             >
               Confirm
             </button>
-            <button onClick={handleCancelClick}>Cancel</button>
+            <button
+              style={{
+                backgroundColor: "lightGrey",
+                borderRadius: 10,
+                width: 60,
+              }}
+              onClick={handleCancelClick}
+            >
+              Cancel
+            </button>
           </div>
         </div>
       ) : (
