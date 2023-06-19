@@ -110,6 +110,7 @@ const SimpleCategoryDropdown = () => {
   return (
     <>
       <div>
+        {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
           style={{
@@ -132,6 +133,7 @@ const SimpleCategoryDropdown = () => {
           {dropdownMenu ? (
             <div>
               <div>
+                {/* === 드롭 다운 메뉴 === */}
                 {categories.map((category) => (
                   <button
                     key={category}
@@ -151,6 +153,7 @@ const SimpleCategoryDropdown = () => {
                   </button>
                 ))}
               </div>
+
               <div
                 style={{
                   display: "flex",
@@ -180,6 +183,7 @@ const SimpleCategoryDropdown = () => {
                   </div>
                 ))}
               </div>
+              {/* === 확인/취소 버튼 === */}
               <div>
                 <button
                   style={{
