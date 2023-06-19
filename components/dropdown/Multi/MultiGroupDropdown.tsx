@@ -174,7 +174,12 @@ const MultiGroupDropdown = () => {
       {/* 입력 창 */}
       <div
         onClick={handleDropdownVisible}
-        style={{ backgroundColor: "skyblue", width: 200, cursor: "pointer" }}
+        style={{
+          backgroundColor: "lightGrey",
+          width: 150,
+          height: 20,
+          cursor: "pointer",
+        }}
       >
         {dropdownText}
       </div>
