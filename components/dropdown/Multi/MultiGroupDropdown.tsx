@@ -154,6 +154,7 @@ const MultiGroupDropdown = () => {
 
   return (
     <div>
+      {/* === 입력 창 === */}
       <div
         onClick={handleDropdownVisible}
         style={{
@@ -165,6 +166,7 @@ const MultiGroupDropdown = () => {
       >
         {selectedData.length === 1 ? selectedOptionName : dropdownText}
       </div>
+      {/* === 드롭 다운 메뉴 === */}
       <div
         style={{
           position: "absolute",
@@ -234,6 +236,7 @@ const MultiGroupDropdown = () => {
               <div>Data가 존재하지 않습니다.</div>
             )}
             <div>
+              {/* === 확인/취소 버튼 === */}
               <button
                 style={{
                   backgroundColor: "lightGrey",
