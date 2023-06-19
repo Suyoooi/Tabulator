@@ -64,7 +64,11 @@ const SimpleDropdown = () => {
         {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
-          style={{ backgroundColor: "white", width: 200, cursor: "pointer" }}
+          style={{
+            backgroundColor: "white",
+            width: 200,
+            cursor: "pointer",
+          }}
         >
           {selectedOptions.length > 0
             ? `${selectedServerNames[0]}외
