@@ -1,19 +1,53 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReactTabulator } from "react-tabulator";
-import { CellComponent } from "tabulator-tables";
+import { CellComponent, RowComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
 
 interface TableDataItem {
   id: number;
   server: string;
+  value: string;
 }
+
+const initialData: TableDataItem[] = [
+  {
+    id: 1,
+    server: "EMS1",
+    value: "EMS1",
+  },
+  {
+    id: 2,
+    server: "EMS2",
+    value: "EMS2",
+  },
+  {
+    id: 3,
+    server: "EMS3",
+    value: "EMS3",
+  },
+  {
+    id: 4,
+    server: "EMS4",
+    value: "EMS4",
+  },
+  {
+    id: 5,
+    server: "EMS5",
+    value: "EMS5",
+  },
+];
 
 const MultiTabulatorDropdown = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
-  const [tableData, setTableData] = useState<TableDataItem[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [dropdownOpen, setDropdownOpen] = useState<boolean>(false);
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
+  const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
+
+  console.log(selectedData);
+
+  //   선택한 서버에 대한 변수
+  const selectedServerNames = selectedData.map((option) => option.server);
+  const selectedServerCount = selectedData.length;
 
   const columns = [
     {
@@ -32,40 +66,20 @@ const MultiTabulatorDropdown = () => {
     { title: "server", field: "server", hozAlign: "center" },
   ];
 
-  const initialData: TableDataItem[] = [
-    {
-      id: 1,
-      server: "ems server1",
-    },
-    {
-      id: 2,
-      server: "ems server2",
-    },
-    {
-      id: 3,
-      server: "ems server3",
-    },
-    {
-      id: 4,
-      server: "ems server4",
-    },
-    {
-      id: 5,
-      server: "ems server5",
-    },
-  ];
+  // useEffect에서 전체 데이터를 선택한 배열이 반환됨
+  // useEffect(() => {
+  //   setSelectedData(initialData);
+  // }, []);
 
-  useEffect(() => {
-    setTableData(initialData);
-  }, []);
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
   };
 
-  const filteredData = tableData.filter((item) =>
-    item.server.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = searchTerm
+    ? initialData.filter((item) =>
+        item.server.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : initialData;
 
   const options = {
     layout: "fitColumns",
@@ -74,36 +88,65 @@ const MultiTabulatorDropdown = () => {
     movableColumns: true,
   };
 
-  const handleSelect = () => {
-    setDropdownOpen(!dropdownOpen);
-  };
-
+  // 데이터 확인용 alert 추가
+  // 체크박스 선택 여부에 따라 selectedData 배열 업데이트
   const handleConfirm = () => {
     const selectedRows = tableRef.current?.table.getSelectedRows() || [];
     const selectedCount = selectedRows.length;
-    setSelectedData(selectedRows);
-    setDropdownOpen(false);
-    alert(`EMS 서버 ${selectedCount}건이 선택되었습니다.`);
-    document
-      .getElementById("selectedCount")
-      ?.setAttribute("value", String(selectedCount));
+
+    if (selectedCount > 0) {
+      const selectedItems = selectedRows.map((row: RowComponent) =>
+        row.getData()
+      );
+      setSelectedData(selectedItems);
+      const selectedServerNames = selectedItems.map(
+        (item: TableDataItem) => item.server
+      );
+      alert(
+        `서버 ${selectedCount}건을 선택했습니다. 선택한 서버: ${selectedServerNames.join(
+          ", "
+        )}`
+      );
+    } else {
+      setSelectedData([]);
+      alert("No servers selected");
+    }
+    setDropdownMenu(false);
+
+    // 상태 업데이트 이후에 선택한 데이터 출력
+    console.log(selectedData);
   };
 
-  const handleCancel = () => {
-    setDropdownOpen(false);
+  const handleDropdownVisible = () => {
+    setSelectedData([]);
+    setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
+    setDropdownMenu(!dropdownMenu);
   };
+
+  const handleCancelClick = () => {
+    setSelectedData([]);
+    setDropdownMenu(false);
+  };
+
+  const dropdownText =
+    selectedData.length > 0
+      ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
+      : "EMS server를 선택하세요";
 
   return (
     <div>
-      <select onClick={handleSelect}>
-        <option value="" disabled hidden>
-          Select
-        </option>
-      </select>
-      {dropdownOpen && (
+      {/* === 입력 창 === */}
+      <div
+        onClick={handleDropdownVisible}
+        style={{ backgroundColor: "skyblue", width: 200, cursor: "pointer" }}
+      >
+        {dropdownText}
+      </div>
+      {dropdownMenu ? (
         <div style={{ width: 200 }}>
           <div>
             <input
+              style={{ color: "black" }}
               type="text"
               placeholder="Search"
               value={searchTerm}
@@ -118,10 +161,21 @@ const MultiTabulatorDropdown = () => {
             layout={"fitData"}
           />
           <div>
-            <button onClick={handleConfirm}>Confirm</button>
-            <button onClick={handleCancel}>Cancel</button>
+            <button
+              style={{
+                backgroundColor: "pink",
+                borderRadius: 10,
+                width: 80,
+              }}
+              onClick={handleConfirm}
+            >
+              Confirm
+            </button>
+            <button onClick={handleCancelClick}>Cancel</button>
           </div>
         </div>
+      ) : (
+        <div></div>
       )}
     </div>
   );
