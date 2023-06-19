@@ -35,6 +35,16 @@ const initialData: TableDataItem[] = [
     server: "EMS5",
     value: "EMS5",
   },
+  {
+    id: 6,
+    server: "EMS6",
+    value: "EMS6",
+  },
+  {
+    id: 7,
+    server: "EMS7",
+    value: "EMS7",
+  },
 ];
 
 const SingleTabulatorDropdown = () => {
