@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReactTabulator } from "react-tabulator";
-import { CellComponent } from "tabulator-tables";
+import { CellComponent, RowComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
 
 interface TableDataItem {
@@ -43,41 +43,59 @@ const SingleTabulatorDropdown = () => {
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
-  //   선택한 서버에 대한 변수
+  console.log(selectedData);
+
+  // 선택한 서버에 대한 변수
   const selectedServerNames = selectedData.map((option) => option.server);
   const selectedServerCount = selectedData.length;
-
-  console.log(selectedData);
 
   const columns = [
     {
       title: "",
       width: 40,
-      formatter: "rowSelection",
-      titleFormatter: "rowSelection",
+      formatter: (cell: CellComponent) => {
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.addEventListener("change", () => {
+          const row = cell.getRow();
+          const isChecked = checkbox.checked;
+
+          if (isChecked) {
+            const selectedRows = tableRef.current?.table.getSelectedRows();
+            if (selectedRows) {
+              selectedRows.forEach((selectedRow: RowComponent) => {
+                const selectedCheckbox = selectedRow
+                  .getElement()
+                  .querySelector("input[type='checkbox']");
+                if (selectedCheckbox && selectedCheckbox !== checkbox) {
+                  (selectedCheckbox as HTMLInputElement).checked = false;
+                  selectedRow.toggleSelect();
+                }
+              });
+            }
+          }
+
+          row.toggleSelect();
+        });
+
+        return checkbox;
+      },
       hozAlign: "center",
       headerSort: false,
       cssClass: "text-center",
-      cellClick: function (cell: CellComponent) {
-        const row = cell.getRow();
-        row.toggleSelect();
-      },
     },
-    // { title: "", field: "", hozAlign: "center", headerSort: false },
     { title: "server", field: "server", hozAlign: "center" },
   ];
-
-  useEffect(() => {
-    setSelectedData(initialData);
-  }, []);
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
-  const filteredData = selectedData.filter((item) =>
-    item.server.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredData = searchTerm
+    ? initialData.filter((item) =>
+        item.server.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : initialData;
 
   const options = {
     layout: "fitColumns",
@@ -86,23 +104,48 @@ const SingleTabulatorDropdown = () => {
     movableColumns: true,
   };
 
-  // 데이터 확인용 alert 추가
   const handleConfirm = () => {
-    if (selectedServerCount > 0) {
+    const selectedRows = tableRef.current?.table.getSelectedRows() || [];
+    const selectedCount = selectedRows.length;
+
+    if (selectedCount > 0) {
+      const selectedItems = selectedRows.map((row: RowComponent) =>
+        row.getData()
+      );
+      setSelectedData(selectedItems);
+      const selectedServerNames = selectedItems.map(
+        (item: TableDataItem) => item.server
+      );
       alert(
-        `서버 ${selectedServerCount}건을 선택했습니다. 선택한 서버: ${selectedServerNames.join(
+        `서버 ${selectedCount}건을 선택했습니다. 선택한 서버: ${selectedServerNames.join(
           ", "
         )}`
       );
     } else {
+      setSelectedData([]);
       alert("No servers selected");
     }
+
     setDropdownMenu(false);
+
+    console.log(selectedData);
   };
 
   const handleDropdownVisible = () => {
+    setSelectedData([]);
+    setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
     setDropdownMenu(!dropdownMenu);
   };
+
+  const handleCancelClick = () => {
+    setSelectedData(initialData);
+    setDropdownMenu(false);
+  };
+
+  const dropdownText =
+    selectedData.length > 0
+      ? `${selectedServerNames[0]}`
+      : "EMS server를 선택하세요";
 
   return (
     <div>
@@ -111,14 +154,13 @@ const SingleTabulatorDropdown = () => {
         onClick={handleDropdownVisible}
         style={{ backgroundColor: "white", width: 200, cursor: "pointer" }}
       >
-        {selectedData.length > 0
-          ? `${selectedServerNames[0]}외 ${selectedData.length}건 `
-          : "ems server 선택"}
+        {dropdownText}
       </div>
       {dropdownMenu ? (
         <div style={{ width: 200 }}>
           <div>
             <input
+              style={{ color: "black" }}
               type="text"
               placeholder="Search"
               value={searchTerm}
@@ -143,7 +185,7 @@ const SingleTabulatorDropdown = () => {
             >
               Confirm
             </button>
-            <button onClick={() => setSelectedData([])}>Cancel</button>
+            <button onClick={handleCancelClick}>Cancel</button>
           </div>
         </div>
       ) : (
