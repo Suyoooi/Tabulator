@@ -93,12 +93,17 @@ const SimpleCategoryDropdown = () => {
       <div>
         <div
           onClick={handleDropdownVisible}
-          style={{ backgroundColor: "skyblue", width: 200, cursor: "pointer" }}
+          style={{
+            backgroundColor: "lightGrey",
+            width: 150,
+            height: 20,
+            cursor: "pointer",
+          }}
         >
           {placeholder}
         </div>
         <div>
-          <div>
+          <div style={{ backgroundColor: "white" }}>
             {dropdownMenu ? (
               <div>
                 {/* 카테고리 버튼 */}
@@ -108,8 +113,10 @@ const SimpleCategoryDropdown = () => {
                       key={category}
                       onClick={() => handleSelectCategory(category)}
                       style={{
+                        paddingLeft: 4,
+                        paddingRight: 4,
                         backgroundColor:
-                          selectedCategory === category ? "pink" : "white",
+                          selectedCategory === category ? "lightGrey" : "white",
                         borderRadius: 10,
                         marginRight: 5,
                       }}
@@ -140,9 +147,9 @@ const SimpleCategoryDropdown = () => {
                 <div>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={handleConfirm}
                   >
@@ -150,9 +157,9 @@ const SimpleCategoryDropdown = () => {
                   </button>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={handleAllApply}
                   >
@@ -160,9 +167,9 @@ const SimpleCategoryDropdown = () => {
                   </button>
                   <button
                     style={{
-                      backgroundColor: "pink",
+                      backgroundColor: "lightGrey",
                       borderRadius: 10,
-                      width: 80,
+                      width: 60,
                     }}
                     onClick={() => setSelectedOptions([])}
                   >
