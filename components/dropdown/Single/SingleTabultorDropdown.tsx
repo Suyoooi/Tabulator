@@ -132,7 +132,7 @@ const SingleTabulatorDropdown = () => {
   };
 
   const handleDropdownVisible = () => {
-    setSelectedData([]);
+    // setSelectedData([]);
     setSearchTerm(""); // 선택 초기화 시 검색어도 초기화
     setDropdownMenu(!dropdownMenu);
   };
