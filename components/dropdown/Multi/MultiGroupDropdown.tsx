@@ -88,7 +88,7 @@ const MultiGroupDropdown = () => {
 
   const filteredData = searchTerm
     ? initialData.filter((item) =>
-        item.server.toLowerCase().includes(searchTerm.toLowerCase())
+        item.alias.toLowerCase().includes(searchTerm.toLowerCase())
       )
     : initialData;
 
@@ -101,7 +101,7 @@ const MultiGroupDropdown = () => {
 
   const handleSearch = () => {
     if (searchTerm) {
-      tableRef.current?.table.setFilter("alias", "like", searchTerm);
+      tableRef.current?.table.setFilter("server", "like", searchTerm);
     } else {
       tableRef.current?.table.clearFilter();
     }
