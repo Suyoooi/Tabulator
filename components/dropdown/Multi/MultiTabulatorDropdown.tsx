@@ -127,6 +127,11 @@ const MultiTabulatorDropdown = () => {
     setDropdownMenu(false);
   };
 
+  const clearSearch = () => {
+    setSearchTerm("");
+    tableRef.current?.table.clearFilter();
+  };
+
   const dropdownText =
     selectedData.length > 0
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
@@ -150,20 +155,30 @@ const MultiTabulatorDropdown = () => {
         <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
           <div>
             <input
-              style={{ color: "black" }}
+              style={{ color: "black", width: 150 }}
               type="text"
               placeholder="Search"
               value={searchTerm}
               onChange={handleSearchChange}
             />
+            <button
+              onClick={clearSearch}
+              style={{ paddingLeft: 4, paddingRight: 4 }}
+            >
+              Clear
+            </button>
           </div>
-          <ReactTabulator
-            ref={tableRef}
-            data={filteredData}
-            columns={columns}
-            options={options}
-            layout={"fitData"}
-          />
+          {filteredData.length > 0 ? (
+            <ReactTabulator
+              ref={tableRef}
+              data={filteredData}
+              columns={columns}
+              options={options}
+              layout={"fitData"}
+            />
+          ) : (
+            <div>Data가 존재하지 않습니다.</div>
+          )}
           <div>
             <button
               style={{
