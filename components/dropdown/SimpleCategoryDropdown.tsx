@@ -27,15 +27,13 @@ const OptionList: Option[] = [
 
 const SimpleCategoryDropdown = () => {
   const [selectedOptions, setSelectedOptions] = useState<Option[]>([]);
-  const [selectedCategory, setSelectedCategory] = useState<string>("All"); // 기본값 설정
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [dropdownMenu, setDropdownMenu] = useState(false);
   const [confirmMessage, setConfirmMessage] = useState("");
 
-  // 선택한 서버에 대한 변수
   const selectedServerNames = selectedOptions.map((option) => option.name);
   const selectedServerCount = selectedOptions.length;
 
-  // 카테고리 목록 생성
   const categories = [
     "All",
     ...Array.from(new Set(OptionList.map((option) => option.category))),
@@ -88,6 +86,9 @@ const SimpleCategoryDropdown = () => {
       ? `${selectedServerNames[0]}외 ${selectedOptions.length - 1}건`
       : "=== EMS ===";
 
+  const selectedOptionName =
+    selectedOptions.length === 1 ? selectedOptions[0].name : "";
+
   return (
     <>
       <div>
@@ -100,32 +101,48 @@ const SimpleCategoryDropdown = () => {
             cursor: "pointer",
           }}
         >
-          {placeholder}
+          {selectedOptions.length === 1 ? selectedOptionName : placeholder}
         </div>
-        <div>
-          <div style={{ backgroundColor: "white" }}>
-            {dropdownMenu ? (
+        <div
+          style={{
+            position: "absolute",
+            backgroundColor: "#E5E5E5",
+            width: 300,
+            zIndex: 100,
+          }}
+        >
+          {dropdownMenu ? (
+            <div>
               <div>
-                {/* 카테고리 버튼 */}
-                <div>
-                  {categories.map((category) => (
-                    <button
-                      key={category}
-                      onClick={() => handleSelectCategory(category)}
-                      style={{
-                        paddingLeft: 4,
-                        paddingRight: 4,
-                        backgroundColor:
-                          selectedCategory === category ? "lightGrey" : "white",
-                        borderRadius: 10,
-                        marginRight: 5,
-                      }}
-                    >
-                      {category}
-                    </button>
-                  ))}
-                </div>
-                {/* 카테고리별로 옵션을 그룹화하여 출력 */}
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => handleSelectCategory(category)}
+                    style={{
+                      paddingLeft: 4,
+                      paddingRight: 4,
+                      backgroundColor:
+                        selectedCategory === category ? "lightGrey" : "white",
+                      borderRadius: 10,
+                      marginRight: 5,
+                      width: 90,
+                      height: 20,
+                    }}
+                  >
+                    {category}
+                  </button>
+                ))}
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  width: 300,
+                  height: 150,
+                  overflow: "scroll",
+                  flexWrap: "wrap",
+                  alignContent: "start",
+                }}
+              >
                 {OptionList.filter(
                   (option) =>
                     selectedCategory === "All" ||
@@ -144,43 +161,43 @@ const SimpleCategoryDropdown = () => {
                     </label>
                   </div>
                 ))}
-                <div>
-                  <button
-                    style={{
-                      backgroundColor: "lightGrey",
-                      borderRadius: 10,
-                      width: 60,
-                    }}
-                    onClick={handleConfirm}
-                  >
-                    확인
-                  </button>
-                  <button
-                    style={{
-                      backgroundColor: "lightGrey",
-                      borderRadius: 10,
-                      width: 60,
-                    }}
-                    onClick={handleAllApply}
-                  >
-                    all apply
-                  </button>
-                  <button
-                    style={{
-                      backgroundColor: "lightGrey",
-                      borderRadius: 10,
-                      width: 60,
-                    }}
-                    onClick={() => setSelectedOptions([])}
-                  >
-                    all reset
-                  </button>
-                </div>
               </div>
-            ) : (
-              <div></div>
-            )}
-          </div>
+              <div>
+                <button
+                  style={{
+                    backgroundColor: "lightGrey",
+                    borderRadius: 10,
+                    width: 60,
+                  }}
+                  onClick={handleConfirm}
+                >
+                  확인
+                </button>
+                <button
+                  style={{
+                    backgroundColor: "lightGrey",
+                    borderRadius: 10,
+                    width: 70,
+                  }}
+                  onClick={handleAllApply}
+                >
+                  all apply
+                </button>
+                <button
+                  style={{
+                    backgroundColor: "lightGrey",
+                    borderRadius: 10,
+                    width: 60,
+                  }}
+                  onClick={() => setSelectedOptions([])}
+                >
+                  all reset
+                </button>
+              </div>
+            </div>
+          ) : (
+            <div></div>
+          )}
         </div>
       </div>
       <div>{confirmMessage}</div>
