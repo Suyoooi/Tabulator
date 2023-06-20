@@ -114,6 +114,11 @@ const SingleTabulatorDropdown = () => {
     movableColumns: true,
   };
 
+  const noDataOption = {
+    layout: "fitColumns",
+    placeholder: "검색된 데이터가 없습니다.",
+  };
+
   const handleConfirm = () => {
     const selectedRows = tableRef.current?.table.getSelectedRows() || [];
     const selectedCount = selectedRows.length;
@@ -220,7 +225,15 @@ const SingleTabulatorDropdown = () => {
                 />
               </div>
             ) : (
-              <div>Data가 존재하지 않습니다.</div>
+              <div style={{ textAlign: "center" }}>
+                <ReactTabulator
+                  ref={tableRef}
+                  data={[]}
+                  columns={columns}
+                  options={noDataOption}
+                  layout={"fitData"}
+                />
+              </div>
             )}
             {/* === 확인/취소 버튼 === */}
             <div>

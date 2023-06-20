@@ -98,6 +98,11 @@ const MultiTabulatorDropdown = () => {
     movableColumns: true,
   };
 
+  const noDataOption = {
+    layout: "fitColumns",
+    placeholder: "검색된 데이터가 없습니다.",
+  };
+
   // 데이터 확인용 alert 추가
   // 체크박스 선택 여부에 따라 selectedData 배열 업데이트
   const handleConfirm = () => {
@@ -207,7 +212,15 @@ const MultiTabulatorDropdown = () => {
                   layout={"fitData"}
                 />
               ) : (
-                <div>Data가 존재하지 않습니다.</div>
+                <div style={{ textAlign: "center" }}>
+                  <ReactTabulator
+                    ref={tableRef}
+                    data={[]}
+                    columns={columns}
+                    options={noDataOption}
+                    layout={"fitData"}
+                  />
+                </div>
               )}
             </div>
             <div>
