@@ -72,7 +72,7 @@ const MultiGroupDropdown = () => {
   ]);
   const [dropdownMenu, setDropdownMenu] = useState<boolean>(false);
 
-  const selectedServerNames = selectedData.map((option) => option.server);
+  const selectedServerNames = selectedData.map((option) => option.alias);
   const selectedServerCount = selectedData.length;
 
   const columns = [
@@ -129,7 +129,7 @@ const MultiGroupDropdown = () => {
       );
       setSelectedData(selectedItems);
       const selectedServerNames = selectedItems.map(
-        (item: TableDataItem) => item.server
+        (item: TableDataItem) => item.alias
       );
       alert(
         `서버 ${selectedCount}건을 선택했습니다. 선택한 서버: ${selectedServerNames.join(
@@ -174,7 +174,7 @@ const MultiGroupDropdown = () => {
       : "=== EMS ===";
 
   const selectedOptionName =
-    selectedServerCount === 1 ? selectedData[0].value : "";
+    selectedServerCount === 1 ? selectedData[0].alias : "";
 
   return (
     <div>
