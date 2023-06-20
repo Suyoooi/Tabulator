@@ -93,6 +93,11 @@ const MultiBothSearchDropdown = () => {
     movableColumns: true,
   };
 
+  const noDataOption = {
+    layout: "fitColumns",
+    placeholder: "검색된 데이터가 없습니다.",
+  };
+
   // 데이터 확인용 alert 추가
   // 체크박스 선택 여부에 따라 selectedData 배열 업데이트
   const handleConfirm = () => {
@@ -138,7 +143,7 @@ const MultiBothSearchDropdown = () => {
   const dropdownText =
     selectedData.length > 0
       ? `${selectedServerNames[0]}외 ${selectedData.length - 1}건`
-      : "=== EMS ===";
+      : "선택한 server가 없습니다";
 
   const selectedOptionName =
     selectedData.length === 1 ? selectedData[0].value : "";
@@ -150,10 +155,22 @@ const MultiBothSearchDropdown = () => {
         <input
           style={{
             backgroundColor: "lightGrey",
-            width: 150,
+            width: 120,
             height: 24,
           }}
+          type="text"
+          placeholder="Search"
+          value={searchTerm}
+          onChange={handleSearchChange}
         ></input>
+        <button
+          style={{ width: 56, backgroundColor: "#C9C9C9" }}
+          onClick={() => {
+            setDropdownMenu(true);
+          }}
+        >
+          검색
+        </button>
         <button
           onClick={handleDropdownVisible}
           style={{
@@ -189,7 +206,10 @@ const MultiBothSearchDropdown = () => {
               />
               <button
                 onClick={clearSearch}
-                style={{ paddingLeft: 4, paddingRight: 4 }}
+                style={{
+                  width: 50,
+                  backgroundColor: "#C9C9C9",
+                }}
               >
                 Clear
               </button>
@@ -212,15 +232,14 @@ const MultiBothSearchDropdown = () => {
                   layout={"fitData"}
                 />
               ) : (
-                <div>
+                <div style={{ textAlign: "center" }}>
                   <ReactTabulator
                     ref={tableRef}
-                    data={filteredData}
+                    data={[]}
                     columns={columns}
-                    options={options}
+                    options={noDataOption}
                     layout={"fitData"}
                   />
-                  <div>Data가 존재하지 않습니다.</div>
                 </div>
               )}
             </div>
