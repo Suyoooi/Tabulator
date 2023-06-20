@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 interface Option {
   id: number;
@@ -70,9 +70,25 @@ const SimpleDropdown = () => {
     setDropdownMenu(!dropdownMenu);
   };
 
+  // 외부 클릭했을 때 드롭다운 닫히도록 함.
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <>
-      <div>
+      <div ref={dropdownRef as React.RefObject<HTMLDivElement>}>
         {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}

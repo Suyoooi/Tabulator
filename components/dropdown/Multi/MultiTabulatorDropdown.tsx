@@ -153,8 +153,27 @@ const MultiTabulatorDropdown = () => {
   const selectedOptionName =
     selectedData.length === 1 ? selectedData[0].value : "";
 
+  // 외부 클릭했을 때 드롭다운 닫히도록 함.
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div style={{ zIndex: 10 }}>
+    <div
+      style={{ zIndex: 10 }}
+      ref={dropdownRef as React.RefObject<HTMLDivElement>}
+    >
       {/* === 입력 창 === */}
       <div
         onClick={handleDropdownVisible}

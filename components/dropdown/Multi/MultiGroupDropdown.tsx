@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { ReactTabulator } from "react-tabulator";
 import { CellComponent, RowComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
@@ -189,8 +189,24 @@ const MultiGroupDropdown = () => {
   const selectedOptionName =
     selectedServerCount === 1 ? selectedData[0].alias : "";
 
+  // 외부 클릭했을 때 드롭다운 닫히도록 함.
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
-    <div>
+    <div ref={dropdownRef as React.RefObject<HTMLDivElement>}>
       {/* === 입력 창 === */}
       <div
         onClick={handleDropdownVisible}

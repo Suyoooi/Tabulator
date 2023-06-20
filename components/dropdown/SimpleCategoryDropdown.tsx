@@ -92,6 +92,7 @@ const SimpleCategoryDropdown = () => {
       if (updatedCategories.length === 0) {
         setSelectedCategories(["All"]);
       } else if (updatedCategories.length === 5) {
+        // 이 부분은 카테고리 수에 따라 달라짐! api 작업 시 변수로 받아올 예정
         setSelectedCategories(["All"]);
       } else {
         setSelectedCategories(updatedCategories);
@@ -124,9 +125,25 @@ const SimpleCategoryDropdown = () => {
   const selectedOptionName =
     selectedOptions.length === 1 ? selectedOptions[0].name : "";
 
+  // 외부 클릭했을 때 드롭다운 닫히도록 함.
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  useEffect(() => {
+    const handleOutsideClick = (event: { target: any }) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleOutsideClick);
+
+    return () => {
+      document.removeEventListener("mousedown", handleOutsideClick);
+    };
+  }, []);
+
   return (
     <>
-      <div>
+      <div ref={dropdownRef as React.RefObject<HTMLDivElement>}>
         {/* === 입력 창 === */}
         <div
           onClick={handleDropdownVisible}
