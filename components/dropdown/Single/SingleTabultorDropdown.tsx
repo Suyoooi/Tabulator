@@ -200,16 +200,16 @@ const SingleTabulatorDropdown = () => {
                 Clear
               </button>
             </div>
-            <div
-              style={{
-                width: 200,
-                height: 200,
-                overflow: "scroll",
-                overflowX: "hidden",
-                backgroundColor: "#E5E5E5",
-              }}
-            >
-              {filteredData.length > 0 ? (
+            {filteredData.length > 0 ? (
+              <div
+                style={{
+                  width: 200,
+                  height: 200,
+                  overflow: "scroll",
+                  overflowX: "hidden",
+                  backgroundColor: "#E5E5E5",
+                }}
+              >
                 <ReactTabulator
                   ref={tableRef}
                   data={filteredData}
@@ -217,10 +217,10 @@ const SingleTabulatorDropdown = () => {
                   options={options}
                   layout={"fitData"}
                 />
-              ) : (
-                <div>Data가 존재하지 않습니다.</div>
-              )}
-            </div>
+              </div>
+            ) : (
+              <div>Data가 존재하지 않습니다.</div>
+            )}
             {/* === 확인/취소 버튼 === */}
             <div>
               <button
