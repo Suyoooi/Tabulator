@@ -76,11 +76,6 @@ const MultiBothSearchDropdown = () => {
     { title: "server", field: "server", hozAlign: "center" },
   ];
 
-  // useEffect에서 전체 데이터를 선택한 배열이 반환됨
-  // useEffect(() => {
-  //   setSelectedData(initialData);
-  // }, []);
-
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
@@ -152,16 +147,6 @@ const MultiBothSearchDropdown = () => {
     <div style={{ zIndex: 10 }}>
       {/* === 입력 창 === */}
       <div style={{ display: "flex" }}>
-        {/* <div
-          style={{
-            backgroundColor: "lightGrey",
-            width: 150,
-            height: 24,
-            cursor: "pointer",
-          }}
-        >
-          {selectedData.length === 1 ? selectedOptionName : dropdownText}
-        </div> */}
         <input
           style={{
             backgroundColor: "lightGrey",
