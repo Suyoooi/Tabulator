@@ -118,15 +118,6 @@ const SimpleCategoryDropdown = () => {
     setDropdownMenu(!dropdownMenu);
   };
 
-  const handleAllApply = () => {
-    const categoryOptions = selectedCategories.includes("All")
-      ? OptionList
-      : OptionList.filter((option) =>
-          selectedCategories.includes(option.category)
-        );
-    setSelectedOptions(categoryOptions);
-  };
-
   const placeholder =
     selectedOptions.length > 0
       ? `${selectedServerNames[0]}외 ${selectedOptions.length - 1}건`
@@ -238,7 +229,9 @@ const SimpleCategoryDropdown = () => {
                     borderRadius: 10,
                     width: 70,
                   }}
-                  onClick={handleAllApply}
+                  onClick={() => {
+                    setSelectedOptions(OptionList);
+                  }}
                 >
                   all apply
                 </button>
