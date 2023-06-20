@@ -72,18 +72,30 @@ const SimpleCategoryDropdown = () => {
     }
   };
 
-  const handleSelectCategory = (category: string) => {
-    if (category === "All") {
-      setSelectedCategories(["All"]);
-    } else {
-      const updatedCategories = selectedCategories.includes("All")
-        ? [category]
-        : selectedCategories.includes(category)
-        ? selectedCategories.filter((c) => c !== category)
-        : [...selectedCategories, category];
+  console.log(selectedCategories);
 
-      setSelectedCategories(updatedCategories);
-    }
+  const handleSelectCategory = (category: string) => {
+    setSelectedCategories((currentCategories) => {
+      if (category === "All") {
+        return ["All"];
+      } else {
+        const updatedCategories = currentCategories.includes("All")
+          ? [category]
+          : currentCategories.includes(category)
+          ? currentCategories.filter((c) => c !== category)
+          : [...currentCategories, category];
+
+        if (updatedCategories.length === 0) {
+          return ["All"];
+        } else if (updatedCategories.length === 5) {
+          return ["All"];
+        } else {
+          return updatedCategories;
+        }
+      }
+    });
+  };
+
   };
 
   const handleConfirm = () => {
