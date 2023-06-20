@@ -163,8 +163,16 @@ const MultiGroupDropdown = () => {
         : selectedCategories.includes(category)
         ? selectedCategories.filter((c) => c !== category)
         : [...selectedCategories, category];
-
       setSelectedCategories(updatedCategories);
+
+      if (updatedCategories.length === 0) {
+        setSelectedCategories(["All"]);
+      } else if (updatedCategories.length === 3) {
+        // 이 부분은 카테고리 수에 따라 달라짐! api 작업 시 변수로 받아올 예정
+        setSelectedCategories(["All"]);
+      } else {
+        setSelectedCategories(updatedCategories);
+      }
     }
   };
 
