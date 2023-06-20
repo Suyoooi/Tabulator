@@ -175,9 +175,11 @@ const MultiBothSearchDropdown = () => {
           zIndex: 100,
         }}
       >
+        {selectedData.length === 1 ? selectedOptionName : dropdownText}
         {dropdownMenu ? (
           <div style={{ width: 200, backgroundColor: "#E5E5E5" }}>
             <div>
+              {/* === 검색 기능 === */}
               <input
                 style={{ color: "black", width: 150 }}
                 type="text"
