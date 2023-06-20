@@ -96,6 +96,8 @@ const SimpleCategoryDropdown = () => {
     });
   };
 
+  const handleDropdownBlur = () => {
+    setDropdownMenu(false);
   };
 
   const handleConfirm = () => {
@@ -148,12 +150,14 @@ const SimpleCategoryDropdown = () => {
           {selectedOptions.length === 1 ? selectedOptionName : placeholder}
         </div>
         <div
+          id="dropdown-container"
           style={{
             position: "absolute",
             backgroundColor: "#E5E5E5",
             width: 300,
             zIndex: 100,
           }}
+          onBlur={handleDropdownBlur}
         >
           {dropdownMenu ? (
             <div>
