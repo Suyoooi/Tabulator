@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface Option {
   id: number;
@@ -54,6 +54,11 @@ const SimpleCategoryDropdown = () => {
   const selectedServerNames = selectedOptions.map((option) => option.name);
   const selectedServerCount = selectedOptions.length;
 
+  // 드롭다운에 어떤 클릭 이벤트가 일어나야만 실행됨.
+  // const handleDropdownBlur = () => {
+  //   setDropdownMenu(false);
+  // };
+
   const categories = [
     "All",
     ...Array.from(new Set(OptionList.map((option) => option.category))),
@@ -94,10 +99,6 @@ const SimpleCategoryDropdown = () => {
         }
       }
     });
-  };
-
-  const handleDropdownBlur = () => {
-    setDropdownMenu(false);
   };
 
   const handleConfirm = () => {
@@ -150,14 +151,14 @@ const SimpleCategoryDropdown = () => {
           {selectedOptions.length === 1 ? selectedOptionName : placeholder}
         </div>
         <div
-          id="dropdown-container"
+          // id="dropdown-container"
+          // onBlur={handleDropdownBlur}
           style={{
             position: "absolute",
             backgroundColor: "#E5E5E5",
             width: 300,
             zIndex: 100,
           }}
-          onBlur={handleDropdownBlur}
         >
           {dropdownMenu ? (
             <div>
@@ -249,7 +250,6 @@ const SimpleCategoryDropdown = () => {
                   }}
                   onClick={() => {
                     setSelectedOptions([]);
-                    setSelectedCategories([]);
                   }}
                 >
                   all reset
