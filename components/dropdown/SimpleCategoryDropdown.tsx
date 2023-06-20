@@ -80,25 +80,23 @@ const SimpleCategoryDropdown = () => {
   console.log(selectedCategories);
 
   const handleSelectCategory = (category: string) => {
-    setSelectedCategories((currentCategories) => {
-      if (category === "All") {
-        return ["All"];
-      } else {
-        const updatedCategories = currentCategories.includes("All")
-          ? [category]
-          : currentCategories.includes(category)
-          ? currentCategories.filter((c) => c !== category)
-          : [...currentCategories, category];
+    if (category === "All") {
+      return ["All"];
+    } else {
+      const updatedCategories = selectedCategories.includes("All")
+        ? [category]
+        : selectedCategories.includes(category)
+        ? selectedCategories.filter((c) => c !== category)
+        : [...selectedCategories, category];
 
-        if (updatedCategories.length === 0) {
-          return ["All"];
-        } else if (updatedCategories.length === 5) {
-          return ["All"];
-        } else {
-          return updatedCategories;
-        }
+      if (updatedCategories.length === 0) {
+        setSelectedCategories(["All"]);
+      } else if (updatedCategories.length === 5) {
+        setSelectedCategories(["All"]);
+      } else {
+        setSelectedCategories(updatedCategories);
       }
-    });
+    }
   };
 
   const handleConfirm = () => {
