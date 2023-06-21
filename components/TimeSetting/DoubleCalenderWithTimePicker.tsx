@@ -80,7 +80,14 @@ const DoubleCalendarWithTimePicker = () => {
           onClick={openEndDatePicker}
         />
         <button
-          style={{ width: 50, backgroundColor: "lightGrey", borderRadius: 8 }}
+          style={{
+            width: 60,
+            backgroundColor: "lightGrey",
+            borderRadius: 8,
+            border: "none",
+            fontSize: "medium",
+            fontWeight: "bold",
+          }}
           onClick={handleButtonClick}
         >
           Quick
