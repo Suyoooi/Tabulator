@@ -3,7 +3,10 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SingleCalendarWithTimePicker = () => {
-  const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null);
+  const nowTime = new Date(Date.now());
+  const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(
+    nowTime
+  );
   const DatePickerRef = useRef<any>(null);
 
   const handleDateChange = (date: Date | null) => {
