@@ -1,17 +1,17 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const SingleCalendarWithTimePicker = () => {
   const [selectedDateTime, setSelectedDateTime] = useState<Date | null>(null);
-  const [imageSrc, setImageSrc] = useState<string | undefined>("/calender.png");
+  const DatePickerRef = useRef<any>(null);
 
   const handleDateChange = (date: Date | null) => {
     setSelectedDateTime(date);
   };
 
-  const handleImageClick = (date: Date | null) => {
-    setSelectedDateTime(date);
+  const openDatePicker = () => {
+    DatePickerRef.current.setOpen(true);
   };
 
   return (
@@ -24,7 +24,11 @@ const SingleCalendarWithTimePicker = () => {
           dateFormat="yyyy.MM.dd HH:mm"
           timeFormat="HH:mm"
         />
-        <img src={imageSrc} style={{ width: 24 }} onChange={handleImageClick} />
+        <img
+          src="/calender.png"
+          style={{ width: 24 }}
+          onClick={openDatePicker}
+        />
       </div>
     </div>
   );
