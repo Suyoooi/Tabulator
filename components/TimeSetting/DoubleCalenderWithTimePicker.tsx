@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-const DoubleCalenderWithTimePicker = () => {
+const DoubleCalendarWithTimePicker = () => {
   const [startDateTime, setStartDateTime] = useState<Date | null>(null);
   const [endDateTime, setEndDateTime] = useState<Date | null>(null);
   const startDatePickerRef = useRef<any>(null);
@@ -10,6 +10,9 @@ const DoubleCalenderWithTimePicker = () => {
 
   const handleStartDateChange = (date: Date | null) => {
     setStartDateTime(date);
+    // 시작 일시를 변경하면 종료 일시를 초기화
+    // 종료 일시가 시작 일시보다 이를 수 있기 때문
+    setEndDateTime(null);
   };
 
   const handleEndDateChange = (date: Date | null) => {
@@ -27,6 +30,15 @@ const DoubleCalenderWithTimePicker = () => {
 
   const openEndDatePicker = () => {
     endDatePickerRef.current.setOpen(true);
+  };
+
+  const handleButtonClick = () => {
+    console.log("시작 일시:", startDateTime);
+    console.log("종료 일시:", endDateTime);
+    console.log("조회에 성공했습니다");
+    alert(
+      `조회에 성공했습니다.\n시작 일시: ${startDateTime?.toLocaleString()}\n종료 일시: ${endDateTime?.toLocaleString()}`
+    );
   };
 
   return (
@@ -56,7 +68,6 @@ const DoubleCalenderWithTimePicker = () => {
           showTimeSelect
           dateFormat="yyyy.MM.dd HH:mm"
           timeFormat="HH:mm"
-          // 시작 일시 이후 날짜, 시간만 선택 가능하도록 설정
           minDate={startDateTime || new Date()}
           filterTime={isTimeAvailable}
           placeholderText="종료 일시 선택하기"
@@ -66,9 +77,15 @@ const DoubleCalenderWithTimePicker = () => {
           style={{ width: 24, cursor: "pointer" }}
           onClick={openEndDatePicker}
         />
+        <button
+          style={{ width: 50, backgroundColor: "lightGrey", borderRadius: 8 }}
+          onClick={handleButtonClick}
+        >
+          Quick
+        </button>
       </div>
     </div>
   );
 };
 
-export default DoubleCalenderWithTimePicker;
+export default DoubleCalendarWithTimePicker;
