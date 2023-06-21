@@ -3,8 +3,12 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const QuickDatePicker = () => {
-  const [startDateTime, setStartDateTime] = useState<Date | null>(null);
-  const [endDateTime, setEndDateTime] = useState<Date | null>(null);
+  const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+  const nowTime = new Date(Date.now());
+  const [startDateTime, setStartDateTime] = useState<Date | null>(
+    tenMinutesAgo
+  );
+  const [endDateTime, setEndDateTime] = useState<Date | null>(nowTime);
   const startDatePickerRef = useRef<any>(null);
   const endDatePickerRef = useRef<any>(null);
 
@@ -48,7 +52,7 @@ const QuickDatePicker = () => {
           showTimeSelect
           dateFormat="yyyy.MM.dd HH:mm"
           timeFormat="HH:mm"
-          placeholderText="시작 일시 선택하기"
+          //   placeholderText="시작 일시 선택하기"
         />
         <img
           src="/calender.png"
@@ -67,7 +71,7 @@ const QuickDatePicker = () => {
           timeFormat="HH:mm"
           minDate={startDateTime || new Date()}
           filterTime={isTimeAvailable}
-          placeholderText="종료 일시 선택하기"
+          //   placeholderText="종료 일시 선택하기"
         />
         <img
           src="/calender.png"
