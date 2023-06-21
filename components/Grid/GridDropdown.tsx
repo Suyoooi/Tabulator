@@ -31,7 +31,6 @@ const GridDropdown = () => {
       setSelectAll(false);
     } else {
       setSelectedData((prevSelectedData) => [...prevSelectedData, item]);
-      // 이 조건문을 추가하여 모든 데이터가 선택되었는지 확인하고 전체 체크박스 상태를 업데이트합니다.
       if (selectedData.length + 1 === initialData.length) {
         setSelectAll(true);
       }
@@ -68,7 +67,7 @@ const GridDropdown = () => {
       />
       <table className="w-full border-collapse">
         <thead>
-          <tr>
+          <tr style={{ backgroundColor: "grey" }}>
             <th className="w-12">
               <input
                 type="checkbox"
@@ -76,12 +75,17 @@ const GridDropdown = () => {
                 onChange={handleSelectAllChange}
               />
             </th>
-            <th style={{ color: "black" }}>Server</th>
+            <th style={{ color: "black", backgroundColor: "grey" }}>Server</th>
           </tr>
         </thead>
         <tbody>
-          {filteredData.map((item) => (
-            <tr key={item.id}>
+          {filteredData.map((item, index) => (
+            <tr
+              key={item.id}
+              style={{
+                backgroundColor: index % 2 === 0 ? "lightGrey" : "grey",
+              }}
+            >
               <td className="text-center">
                 <input
                   type="checkbox"
@@ -89,21 +93,22 @@ const GridDropdown = () => {
                   onChange={() => handleCheckboxChange(item)}
                 />
               </td>
-              <td style={{ color: "black" }}>{item.server}</td>
+              <td style={{ color: "black", paddingLeft: 5 }}>{item.server}</td>
             </tr>
           ))}
         </tbody>
+
+        {selectedData.length > 0 && (
+          <div className="mt-4">
+            <h4 style={{ color: "black" }}>Selected Servers:</h4>
+            <ul>
+              {selectedData.map((item) => (
+                <li key={item.id}>{item.server}</li>
+              ))}
+            </ul>
+          </div>
+        )}
       </table>
-      {selectedData.length > 0 && (
-        <div className="mt-4">
-          <h4 style={{ color: "black" }}>Selected Servers:</h4>
-          <ul>
-            {selectedData.map((item) => (
-              <li key={item.id}>{item.server}</li>
-            ))}
-          </ul>
-        </div>
-      )}
     </div>
   );
 };
