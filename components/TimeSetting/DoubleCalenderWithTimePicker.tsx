@@ -30,7 +30,7 @@ const DoubleCalenderWithTimePicker = () => {
   };
 
   return (
-    <div style={{ display: "flex" }}>
+    <div style={{ display: "flex", alignItems: "center" }}>
       <div style={{ display: "flex" }}>
         <DatePicker
           ref={startDatePickerRef}
