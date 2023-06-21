@@ -18,6 +18,7 @@ import MultiSearchDropdown from "@/components/dropdown/Multi/MultiSearchDropdown
 import SimpleCategoryDropdown from "@/components/dropdown/SimpleCategoryDropdown";
 import SingleSearchDropdown from "@/components/dropdown/Single/SingleSearchDropdown";
 import MultiTabulatorDropdown from "@/components/dropdown/Multi/MultiTabulatorDropdown";
+import MultiBothSearchDropdown from "@/components/dropdown/Multi/MultiBothSearchDropdown";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -42,37 +43,41 @@ const subMenuOptions = [
 export default function Home() {
   return (
     <>
-      <div>관리자 화면 정의서 Dropdown</div>
-      <br />
-      <SimpleDropdown />
-      <br />
-      <SimpleCategoryDropdown />
-      <br />
-      <MultiGroupDropdown />
-      <br />
-      <div>모니터 화면 정의서 Dropdown</div>
-      <br />
-      <SingleTabulatorDropdown />
-      <br />
-      <MultiTabulatorDropdown />
-      {/* <MultiSearchDropdown /> */}
-      {/* <BasicDropdown /> */}
-      {/* <SimpleDropdown /> */}
-      <br />
-      {/* <SingleSelectDropdown /> */}
-      <br />
-      {/* <SingleTabulatorDropdown /> */}
-      <br />
-      {/* <MultiSelectDropdown /> */}
-      <br />
-      {/* <MultiTabulatorDropdown /> */}
-      {/* <TabulatorDataTree /> */}
-      {/* <DataAppend /> */}
-      {/* <DataPreAppend /> */}
-      {/* <EmsGridTest /> */}
-      {/* <TabulatorGrid /> */}
-      {/* <GridComponent /> */}
-      {/* <ExportTest /> */}
+      <div style={{ height: "800px", background: "ivory" }}>
+        <div style={{ display: "flex", gap: 10 }}>
+          <br />
+          <SimpleDropdown />
+          <br />
+          <SimpleCategoryDropdown />
+          <br />
+          <MultiGroupDropdown />
+          <br />
+          <br />
+          <SingleTabulatorDropdown />
+          <br />
+          <MultiTabulatorDropdown />
+          <br />
+          <MultiBothSearchDropdown />
+          {/* <MultiSearchDropdown /> */}
+          {/* <BasicDropdown /> */}
+          {/* <SimpleDropdown /> */}
+          <br />
+          {/* <SingleSelectDropdown /> */}
+          <br />
+          {/* <SingleTabulatorDropdown /> */}
+          <br />
+          {/* <MultiSelectDropdown /> */}
+          <br />
+          {/* <MultiTabulatorDropdown /> */}
+          {/* <TabulatorDataTree /> */}
+          {/* <DataAppend /> */}
+          {/* <DataPreAppend /> */}
+          {/* <EmsGridTest /> */}
+          {/* <TabulatorGrid /> */}
+          {/* <GridComponent /> */}
+          {/* <ExportTest /> */}
+        </div>
+      </div>
     </>
   );
 }
