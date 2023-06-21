@@ -18,7 +18,7 @@ const initialData: TableDataItem[] = [
 const GridDropdown = () => {
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
   const [selectAll, setSelectAll] = useState(false);
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   const handleCheckboxChange = (item: TableDataItem) => {
     const isChecked = selectedData.some(
@@ -75,7 +75,18 @@ const GridDropdown = () => {
                 onChange={handleSelectAllChange}
               />
             </th>
-            <th style={{ color: "black", backgroundColor: "grey" }}>Server</th>
+            <th
+              className="border-b"
+              colSpan={2}
+              style={{
+                color: "black",
+                paddingLeft: 10,
+                borderLeft: "2px solid black",
+                backgroundColor: "grey",
+              }}
+            >
+              Server
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -93,7 +104,17 @@ const GridDropdown = () => {
                   onChange={() => handleCheckboxChange(item)}
                 />
               </td>
-              <td style={{ color: "black", paddingLeft: 5 }}>{item.server}</td>
+              <td
+                className="border-b"
+                colSpan={2}
+                style={{
+                  color: "black",
+                  paddingLeft: 10,
+                  borderLeft: "2px solid black",
+                }}
+              >
+                {item.server}
+              </td>
             </tr>
           ))}
         </tbody>
