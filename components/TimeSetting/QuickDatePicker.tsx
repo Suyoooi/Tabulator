@@ -8,11 +8,11 @@ interface QuickOptionList {
 }
 
 const QuickList: QuickOptionList[] = [
-  { value: "1분 전", minutes: -1 },
-  { value: "5분 전", minutes: -5 },
-  { value: "10분 전", minutes: -10 },
-  { value: "20분 전", minutes: -20 },
-  { value: "30분 전", minutes: -30 },
+  { value: "최근 1분", minutes: 1 },
+  { value: "최근 5분", minutes: 5 },
+  { value: "최근 10분", minutes: 10 },
+  { value: "최근 20분", minutes: 20 },
+  { value: "최근 30분", minutes: 30 },
   { value: "1분 후", minutes: 1 },
   { value: "5분 후", minutes: 5 },
   { value: "10분 후", minutes: 10 },
@@ -57,9 +57,31 @@ const QuickDatePicker = () => {
     console.log(openModal);
   };
 
-  const handleQuickSelect = (minutes: number) => {
-    const newStartDateTime = new Date(Date.now() + minutes * 60 * 1000);
-    setStartDateTime(newStartDateTime);
+  const handleQuickSelect = (value: string, minutes: number) => {
+    const currentTime = new Date();
+    let newEndDateTime;
+    let newStartDateTime;
+
+    if (value.includes("후")) {
+      newStartDateTime = new Date(
+        startDateTime!.getTime() + minutes * 60 * 1000
+      );
+      newEndDateTime =
+        newStartDateTime > currentTime ? currentTime : newStartDateTime;
+      setEndDateTime(newStartDateTime);
+      //   setStartDateTime(newStartDateTime);
+    } else if (value.includes("최근")) {
+      newEndDateTime = new Date(currentTime.getTime());
+      newStartDateTime = new Date(currentTime.getTime() - minutes * 60 * 1000);
+      setEndDateTime(newEndDateTime);
+      setStartDateTime(newStartDateTime);
+    } else {
+      return;
+    }
+    // setEndDateTime(newStartDateTime);
+    // setStartDateTime(newStartDateTime);
+    console.log(newEndDateTime);
+    console.log(newStartDateTime);
   };
 
   const closeQuickModal = () => {
@@ -76,7 +98,6 @@ const QuickDatePicker = () => {
           showTimeSelect
           dateFormat="yyyy.MM.dd HH:mm"
           timeFormat="HH:mm"
-          //   placeholderText="시작 일시 선택하기"
         />
         <img
           src="/calender.png"
@@ -95,7 +116,6 @@ const QuickDatePicker = () => {
           timeFormat="HH:mm"
           minDate={startDateTime || new Date()}
           filterTime={isTimeAvailable}
-          //   placeholderText="종료 일시 선택하기"
         />
         <img
           src="/calender.png"
@@ -145,7 +165,7 @@ const QuickDatePicker = () => {
                     }}
                     key={data.value}
                     onClick={() => {
-                      handleQuickSelect(data.minutes);
+                      handleQuickSelect(data.value, data.minutes);
                       closeQuickModal();
                     }}
                   >
