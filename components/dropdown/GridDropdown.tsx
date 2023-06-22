@@ -2,17 +2,18 @@ import React, { useEffect, useRef, useState } from "react";
 
 interface TableDataItem {
   id: number;
+  group: string;
   server: string;
 }
 
 const initialData: TableDataItem[] = [
-  { id: 1, server: "EMS1" },
-  { id: 2, server: "EMS2" },
-  { id: 3, server: "EMS3" },
-  { id: 4, server: "EMS4" },
-  { id: 5, server: "EMS5" },
-  { id: 6, server: "EMS6" },
-  { id: 7, server: "EMS7" },
+  { id: 1, group: "a", server: "EMS1" },
+  { id: 2, group: "a", server: "EMS2" },
+  { id: 3, group: "b", server: "EMS3" },
+  { id: 5, group: "c", server: "EMS4" },
+  { id: 6, group: "d", server: "EMS5" },
+  { id: 7, group: "e", server: "EMS6" },
+  { id: 8, group: "b", server: "EMS7" },
 ];
 
 const GridDropdown = () => {
@@ -43,7 +44,7 @@ const GridDropdown = () => {
   const handleSelectAllChange = () => {
     const newSelectAll = !selectAll;
     setSelectAll(newSelectAll);
-    setSelectedData(newSelectAll ? initialData : []);
+    setSelectedData(newSelectAll ? initialData.slice(1) : []);
   };
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -158,6 +159,7 @@ const GridDropdown = () => {
           </button>
           <div style={{ display: "flex", flexDirection: "row" }}>
             <table className="w-full border-collapse">
+              {/* === header === */}
               <thead>
                 <tr style={{ backgroundColor: "grey" }}>
                   <th className="w-12">
@@ -168,7 +170,17 @@ const GridDropdown = () => {
                     />
                   </th>
                   <th
-                    className="border-b"
+                    colSpan={2}
+                    style={{
+                      color: "black",
+                      paddingLeft: 10,
+                      borderLeft: "2px solid black",
+                      backgroundColor: "grey",
+                    }}
+                  >
+                    Group
+                  </th>
+                  <th
                     colSpan={2}
                     style={{
                       color: "black",
@@ -181,33 +193,56 @@ const GridDropdown = () => {
                   </th>
                 </tr>
               </thead>
+              {/* === data === */}
               <tbody>
                 {filteredData.map((item, index) => (
-                  <tr
-                    key={item.id}
-                    style={{
-                      backgroundColor: index % 2 === 0 ? "lightGrey" : "grey",
-                    }}
-                  >
-                    <td className="text-center">
-                      <input
-                        type="checkbox"
-                        checked={checkboxChecked(item)}
-                        onChange={() => handleCheckboxChange(item)}
-                      />
-                    </td>
-                    <td
-                      className="border-b"
-                      colSpan={2}
+                  <React.Fragment key={item.id}>
+                    <tr
                       style={{
-                        color: "black",
-                        paddingLeft: 10,
-                        borderLeft: "2px solid black",
+                        textAlignLast: "center",
+                        backgroundColor: index % 2 === 0 ? "lightGrey" : "grey",
                       }}
                     >
-                      {item.server}
-                    </td>
-                  </tr>
+                      <td className="text-center">
+                        <input
+                          type="checkbox"
+                          checked={checkboxChecked(item)}
+                          onChange={() => handleCheckboxChange(item)}
+                        />
+                      </td>
+                      <td
+                        colSpan={2}
+                        style={{
+                          color: "black",
+                          paddingLeft: 10,
+                          borderLeft: "2px solid black",
+                        }}
+                      >
+                        {item.server}
+                      </td>
+                      {item.group && (
+                        <tr
+                          style={{
+                            backgroundColor:
+                              index % 2 === 0 ? "lightGrey" : "grey",
+                          }}
+                        >
+                          <td
+                            colSpan={5}
+                            style={{
+                              color: "black",
+                              // paddingLeft: 10,
+                              borderLeft: "2px solid black",
+                              fontWeight: "bold",
+                              justifyContent: "center",
+                            }}
+                          >
+                            {item.group}
+                          </td>
+                        </tr>
+                      )}
+                    </tr>
+                  </React.Fragment>
                 ))}
               </tbody>
             </table>
