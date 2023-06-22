@@ -6,13 +6,13 @@ interface TableDataItem {
 }
 
 const initialData: TableDataItem[] = [
-  { id: 1, group: "a", server: "EMS1" },
-  { id: 2, group: "a", server: "EMS2" },
-  { id: 3, group: "b", server: "EMS3" },
-  { id: 4, group: "c", server: "EMS4" },
-  { id: 5, group: "d", server: "EMS5" },
-  { id: 6, group: "e", server: "EMS6" },
-  { id: 7, group: "b", server: "EMS7" },
+  { id: 1, server: "EMS1" },
+  { id: 2, server: "EMS2" },
+  { id: 3, server: "EMS3" },
+  { id: 4, server: "EMS4" },
+  { id: 5, server: "EMS5" },
+  { id: 6, server: "EMS6" },
+  { id: 7, server: "EMS7" },
 ];
 
 const GridComponent = () => {
