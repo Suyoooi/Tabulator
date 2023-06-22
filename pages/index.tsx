@@ -6,7 +6,7 @@ import MultiGroupDropdown from "@/components/dropdown/Multi/MultiGroupDropdown";
 import SimpleCategoryDropdown from "@/components/dropdown/SimpleCategoryDropdown";
 import MultiTabulatorDropdown from "@/components/dropdown/Multi/MultiTabulatorDropdown";
 import MultiBothSearchDropdown from "@/components/dropdown/Multi/MultiBothSearchDropdown";
-import GridDropdown from "@/components/Grid/GridDropdown";
+import GridDropdown from "@/components/dropdown/GridDropdown";
 
 const inter = Inter({ subsets: ["latin"] });
 
