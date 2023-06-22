@@ -11,7 +11,7 @@ interface TableDataItem {
   dob: string;
 }
 
-const GridComponent = () => {
+const SimpleGridComponent = () => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [tableData, setTableData] = useState<TableDataItem[]>([]);
 
@@ -116,4 +116,4 @@ const GridComponent = () => {
   );
 };
 
-export default GridComponent;
+export default SimpleGridComponent;
