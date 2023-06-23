@@ -1,8 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import { ReactTabulator } from "react-tabulator";
-import { CellComponent, RowComponent } from "tabulator-tables";
+import { RowComponent } from "tabulator-tables";
 import "react-tabulator/lib/styles.css";
 
+interface QueueGridProps {
+  columns: any[]; // props로 전달받을 columns의 타입을 지정합니다.
+  radioButtonText: string;
+}
 interface TableDataItem {
   id: number;
   server: string;
@@ -55,7 +59,7 @@ const initialData: TableDataItem[] = [
     group: "Group5",
     server: "ems-05",
     value: "queue01",
-    category: "group3",
+    category: "groupTest",
     queue: "queue01",
     topic: "topic54",
   },
@@ -79,16 +83,55 @@ const initialData: TableDataItem[] = [
   },
   {
     id: 8,
-    group: "test01",
+    group: "test-group01",
     server: "ems-07",
     value: "queue09",
-    category: "test02",
+    category: "test-group01",
+    queue: "queue09",
+    topic: "topic09",
+  },
+  {
+    id: 9,
+    group: "test-group02",
+    server: "ems-07",
+    value: "queue09",
+    category: "test-group02",
+    queue: "queue09",
+    topic: "topic09",
+  },
+  {
+    id: 10,
+    group: "test-group06",
+    server: "ems-07",
+    value: "queue09",
+    category: "test-group06",
+    queue: "queue09",
+    topic: "topic09",
+  },
+  {
+    id: 11,
+    group: "test-group11",
+    server: "ems-07",
+    value: "queue09",
+    category: "test-group11",
+    queue: "queue09",
+    topic: "topic09",
+  },
+  {
+    id: 12,
+    group: "test-group13",
+    server: "ems-07",
+    value: "queue09",
+    category: "test-group13",
     queue: "queue09",
     topic: "topic09",
   },
 ];
 
-const QueueTopicGrid = () => {
+const QueueTopicGrid: React.FC<QueueGridProps> = ({
+  columns,
+  radioButtonText,
+}) => {
   const tableRef = useRef<ReactTabulator | null>(null);
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedData, setSelectedData] = useState<TableDataItem[]>([]);
@@ -99,26 +142,6 @@ const QueueTopicGrid = () => {
 
   const selectedServerNames = selectedData.map((option) => option.queue);
   const selectedServerCount = selectedData.length;
-
-  const columns = [
-    {
-      title: "",
-      width: 20,
-      formatter: "rowSelection",
-      titleFormatter: "rowSelection",
-      hozAlign: "center",
-      headerSort: false,
-      cssClass: "text-center",
-      cellClick: function (cell: CellComponent) {
-        const row = cell.getRow();
-        row.toggleSelect();
-      },
-    },
-    { title: "group", field: "group", hozAlign: "center" },
-    { title: "server", field: "server", hozAlign: "center" },
-    { title: "queue", field: "queue", hozAlign: "center" },
-    { title: "topic", field: "topic", hozAlign: "center" },
-  ];
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
@@ -216,6 +239,8 @@ const QueueTopicGrid = () => {
   const selectedOptionName =
     selectedServerCount === 1 ? selectedData[0].queue : "";
 
+  console.log(radioButtonText);
+
   return (
     <div>
       {/* === 입력 창 === */}
@@ -224,7 +249,7 @@ const QueueTopicGrid = () => {
         style={{
           display: "flex",
           alignItems: "center",
-          backgroundColor: "lightGrey",
+          backgroundColor: "#ebebeb",
           width: 450,
           height: 30,
           cursor: "pointer",
@@ -235,18 +260,12 @@ const QueueTopicGrid = () => {
         {selectedServerCount === 1 ? selectedOptionName : dropdownText}
       </div>
       {/* === 드롭 다운 메뉴 === */}
-      <div
-        style={{
-          backgroundColor: "#E5E5E5",
-          width: 450,
-        }}
-      >
+      <div>
         {dropdownMenu === true ? (
           <div
             style={{
               width: 450,
               backgroundColor: "#E5E5E5",
-              height: 50,
             }}
           >
             {/* === 카테고리 === */}
@@ -254,9 +273,14 @@ const QueueTopicGrid = () => {
               style={{
                 display: "flex",
                 flexDirection: "row",
+                flexWrap: "wrap",
                 gap: 6,
                 paddingTop: 5,
                 paddingLeft: 5,
+                width: 450,
+                height: 70,
+                overflowY: "scroll",
+                overflowX: "hidden",
               }}
             >
               <button
@@ -300,10 +324,37 @@ const QueueTopicGrid = () => {
         )}
 
         {/* === 검색 기능 === */}
-        <div style={{ width: 450, backgroundColor: "#E5E5E5" }}>
-          <div>
+        <div
+          style={{
+            width: 450,
+            backgroundColor: "#E5E5E5",
+          }}
+        >
+          <div
+            style={{
+              border: "1px solid grey",
+              display: "flex",
+              flexDirection: "row",
+            }}
+          >
+            <div
+              style={{
+                width: 130,
+                borderRight: "1px solid grey",
+                textAlign: "center",
+                backgroundColor: "#e4e4e4",
+              }}
+            >
+              <div>
+                {radioButtonText === "Topic" ? (
+                  <div>Topic</div>
+                ) : (
+                  <div>Queue</div>
+                )}
+              </div>
+            </div>
             <input
-              style={{ color: "black", width: 380, height: 30 }}
+              style={{ color: "black", width: 270, height: 30, paddingLeft: 7 }}
               type="text"
               placeholder="Search"
               value={searchTerm}
@@ -312,9 +363,9 @@ const QueueTopicGrid = () => {
             <button
               onClick={clearSearch}
               style={{
-                width: 70,
+                width: 68,
                 height: 30,
-                border: "1px solid black",
+                borderLeft: "1px solid grey",
                 backgroundColor: "ivory",
                 paddingLeft: 4,
                 paddingRight: 4,
@@ -323,6 +374,27 @@ const QueueTopicGrid = () => {
               Clear
             </button>
           </div>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            width: 440,
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ fontWeight: 600, fontSize: 16, padding: 10 }}>
+            조회 결과
+          </div>
+          <img
+            src="/refresh.png"
+            style={{
+              width: 24,
+              height: 24,
+              alignSelf: "center",
+              cursor: "pointer",
+            }}
+            onClick={() => {}}
+          />
         </div>
         {/* === Tabulator === */}
         <div
@@ -337,7 +409,7 @@ const QueueTopicGrid = () => {
             <ReactTabulator
               ref={tableRef}
               data={filteredDataByCategory}
-              columns={columns}
+              columns={columns} // prop으로 받은 columns 사용
               options={options}
               layout={"fitData"}
             />
@@ -353,7 +425,7 @@ const QueueTopicGrid = () => {
             </div>
           )}
         </div>
-        <div>
+        <div style={{ display: "flex", marginTop: 15, gap: 8 }}>
           {/* === 확인/취소 버튼 === */}
           <button
             style={{
