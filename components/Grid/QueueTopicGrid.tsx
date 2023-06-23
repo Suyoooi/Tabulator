@@ -147,10 +147,15 @@ const QueueTopicGrid: React.FC<QueueGridProps> = ({
     setSearchTerm(e.target.value);
   };
 
+  // === 데이터 필터링 (검색 기능) ===
   const filteredData = searchTerm
-    ? initialData.filter((item) =>
-        item.queue.toLowerCase().includes(searchTerm.toLowerCase())
-      )
+    ? initialData.filter((item) => {
+        if (radioButtonText === "Topic") {
+          return item.topic.toLowerCase().includes(searchTerm.toLowerCase());
+        } else {
+          return item.queue.toLowerCase().includes(searchTerm.toLowerCase());
+        }
+      })
     : initialData;
 
   const filteredDataByCategory = selectedCategories.includes("All")
