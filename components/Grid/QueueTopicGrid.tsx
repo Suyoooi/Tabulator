@@ -264,7 +264,7 @@ const QueueTopicGrid: React.FC<QueueGridProps> = ({
       >
         {selectedServerCount === 1 ? selectedOptionName : dropdownText}
       </div>
-      {/* === 드롭 다운 메뉴 === */}
+      {/* === 드롭 다운 카테고리 === */}
       <div>
         {dropdownMenu === true ? (
           <div
