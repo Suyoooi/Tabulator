@@ -16,21 +16,10 @@ const TabulatorGrid = () => {
   >([]);
 
   // csv 형식으로 저장
-  // utf-8 BOM 추가로 한글이 깨지는 문제 해결 (06.23)
   const handleExportCSV = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
-      const data = table.getData();
-      const csvContent =
-        "data:text/csv;charset=utf-8,\uFEFF" +
-        XLSX.utils.sheet_to_csv(XLSX.utils.json_to_sheet(data));
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", "data.csv");
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      table.download("csv", "test.csv");
     }
   };
 
