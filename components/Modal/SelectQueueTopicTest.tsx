@@ -24,8 +24,11 @@ const SelectQueueTopicTest = () => {
         >
           Select Queue/Topic
         </button>
-        {openModal === true && <SelectQueueTopic />}
       </div>
+
+      {openModal === true && (
+        <SelectQueueTopic handleClose={handleButtonClick} />
+      )}
     </>
   );
 };
