@@ -1,8 +1,8 @@
 import { useState } from "react";
 import RadioButtonTrue from "./RadioButtonTrue";
 import RadioButtonFalse from "./RadioButtonFalse";
-import QueueGrid from "../Grid/QueueTopicGrid";
 import { CellComponent } from "tabulator-tables";
+import QueueTopicGrid from "../Grid/QueueTopicGrid";
 
 interface SelectQueueTopicProps {
   handleClose: () => void;
@@ -149,7 +149,7 @@ const SelectQueueTopic: React.FC<SelectQueueTopicProps> = ({ handleClose }) => {
               <div>
                 <div style={{ marginTop: 20 }}>ems server</div>
                 <div style={{ position: "relative" }}>
-                  <QueueGrid
+                  <QueueTopicGrid
                     columns={columns}
                     radioButtonText={radioButtonText}
                   />
