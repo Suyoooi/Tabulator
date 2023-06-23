@@ -4,6 +4,10 @@ import RadioButtonFalse from "./RadioButtonFalse";
 import QueueGrid from "../Grid/QueueTopicGrid";
 import { CellComponent } from "tabulator-tables";
 
+interface SelectQueueTopicProps {
+  handleClose: () => void;
+}
+
 const columnsTopic = [
   {
     title: "",
@@ -41,7 +45,7 @@ const columnsQueue = [
   { title: "queue", field: "queue", hozAlign: "center" },
 ];
 
-const SelectQueueTopic = () => {
+const SelectQueueTopic: React.FC<SelectQueueTopicProps> = ({ handleClose }) => {
   const [openModal, setOpenModal] = useState<boolean>(true);
   const [topicButton, setTopicButton] = useState<boolean>(true);
   const [queueButton, setQueueButton] = useState<boolean>(false);
@@ -51,9 +55,8 @@ const SelectQueueTopic = () => {
   console.log(radioButtonText);
 
   const handleButtonClick = () => {
-    setOpenModal(!openModal);
+    handleClose(); // 부모 컴포넌트의 상태 변경 함수 호출
   };
-
   const handleTopicRadioButtonClick = () => {
     setTopicButton(true);
     setQueueButton(false);
@@ -67,6 +70,8 @@ const SelectQueueTopic = () => {
     setColumns(columnsQueue); // columns 업데이트
     setRadioButtonText("Queue");
   };
+
+  console.log(openModal);
 
   return (
     <>
