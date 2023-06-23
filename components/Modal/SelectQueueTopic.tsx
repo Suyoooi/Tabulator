@@ -1,16 +1,54 @@
 import { useState } from "react";
-import RadioButton from "./RadioButtonTrue";
 import RadioButtonTrue from "./RadioButtonTrue";
 import RadioButtonFalse from "./RadioButtonFalse";
-import Grid from "../Grid/Grid";
-import MultiGroupDropdown from "../dropdown/Multi/MultiGroupDropdown";
-import QueueTopicGrid from "../Grid/QueueGrid";
-import QueueGrid from "../Grid/QueueGrid";
+import QueueGrid from "../Grid/QueueTopicGrid";
+import { CellComponent } from "tabulator-tables";
+
+const columnsTopic = [
+  {
+    title: "",
+    width: 20,
+    formatter: "rowSelection",
+    titleFormatter: "rowSelection",
+    hozAlign: "center",
+    headerSort: false,
+    cssClass: "text-center",
+    cellClick: function (cell: CellComponent) {
+      const row = cell.getRow();
+      row.toggleSelect();
+    },
+  },
+  { title: "group", field: "group", hozAlign: "center" },
+  { title: "server", field: "server", hozAlign: "center" },
+  { title: "topic", field: "topic", hozAlign: "center" },
+];
+const columnsQueue = [
+  {
+    title: "",
+    width: 20,
+    formatter: "rowSelection",
+    titleFormatter: "rowSelection",
+    hozAlign: "center",
+    headerSort: false,
+    cssClass: "text-center",
+    cellClick: function (cell: CellComponent) {
+      const row = cell.getRow();
+      row.toggleSelect();
+    },
+  },
+  { title: "group", field: "group", hozAlign: "center" },
+  { title: "server", field: "server", hozAlign: "center" },
+  { title: "queue", field: "queue", hozAlign: "center" },
+];
 
 const SelectQueueTopic = () => {
   const [openModal, setOpenModal] = useState<boolean>(true);
   const [topicButton, setTopicButton] = useState<boolean>(true);
   const [queueButton, setQueueButton] = useState<boolean>(false);
+  const [columns, setColumns] = useState(columnsTopic);
+  const [radioButtonText, setRadioButtonText] = useState<string>("Topic");
+
+  console.log(radioButtonText);
 
   const handleButtonClick = () => {
     setOpenModal(!openModal);
@@ -19,11 +57,15 @@ const SelectQueueTopic = () => {
   const handleTopicRadioButtonClick = () => {
     setTopicButton(true);
     setQueueButton(false);
+    setColumns(columnsTopic); // columns 업데이트
+    setRadioButtonText("Topic");
   };
 
   const handleQueueRadioButtonClick = () => {
     setTopicButton(false);
     setQueueButton(true);
+    setColumns(columnsQueue); // columns 업데이트
+    setRadioButtonText("Queue");
   };
 
   return (
@@ -45,7 +87,7 @@ const SelectQueueTopic = () => {
           >
             <div
               style={{
-                width: "40%",
+                width: "31%",
                 background: "white",
                 padding: 10,
                 borderRadius: 4,
@@ -58,7 +100,9 @@ const SelectQueueTopic = () => {
                   marginBottom: 30,
                 }}
               >
-                <div style={{ fontSize: 17 }}>EMS Topic/Queue Select</div>
+                <div style={{ fontSize: 20, fontWeight: 600 }}>
+                  EMS Topic/Queue Select
+                </div>
                 <img
                   onClick={handleButtonClick}
                   src="/close.png"
@@ -100,7 +144,10 @@ const SelectQueueTopic = () => {
               <div>
                 <div style={{ marginTop: 20 }}>ems server</div>
                 <div style={{ position: "relative" }}>
-                  <QueueGrid />
+                  <QueueGrid
+                    columns={columns}
+                    radioButtonText={radioButtonText}
+                  />
                 </div>
               </div>
             </div>
