@@ -2,7 +2,7 @@ import { useState } from "react";
 import RadioButtonTrue from "./RadioButtonTrue";
 import RadioButtonFalse from "./RadioButtonFalse";
 import { CellComponent } from "tabulator-tables";
-import QueueTopicGrid from "../grid/QueueTopicGrid";
+import QueueTopicGrid from "../Grid/QueueTopicGrid";
 
 interface SelectQueueTopicProps {
   handleClose: () => void;

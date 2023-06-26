@@ -17,7 +17,6 @@ export default function Home() {
   return (
     <>
       <div style={{ height: "800px", background: "#f7ddd1" }}>
-        {/* <SelectQueueTopicTest />
         <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
           <SelectQueueTopicTest />
           <br />
@@ -28,8 +27,8 @@ export default function Home() {
           <br />
           <MultiGroupDropdown />
           <br />
-        </div> */}
-        {/* <div style={{ display: "flex", gap: 60, marginBottom: 100 }}>
+        </div>
+        <div style={{ display: "flex", gap: 60, marginBottom: 100 }}>
           <br />
           <SingleTabulatorDropdown />
           <br />
@@ -40,9 +39,9 @@ export default function Home() {
           <MultiGroupDropdown />
           <br />
           <GridDropdown />
-        </div> */}
-        <SimpleGridComponent />
-        <ExportTest />
+        </div>
+        {/* <SimpleGridComponent />
+        <ExportTest /> */}
       </div>
     </>
   );
