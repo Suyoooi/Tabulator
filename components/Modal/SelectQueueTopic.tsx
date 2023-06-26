@@ -2,7 +2,7 @@ import { useState } from "react";
 import RadioButtonTrue from "./RadioButtonTrue";
 import RadioButtonFalse from "./RadioButtonFalse";
 import { CellComponent } from "tabulator-tables";
-import QueueTopicGrid from "../Grid/QueueTopicGrid";
+import QueueTopicGrid from "../grid/QueueTopicGrid";
 
 interface SelectQueueTopicProps {
   handleClose: () => void;
@@ -75,7 +75,7 @@ const SelectQueueTopic: React.FC<SelectQueueTopicProps> = ({ handleClose }) => {
 
   return (
     <>
-      <div>
+      <div style={{ zIndex: 100 }}>
         {openModal === true && (
           <div
             style={{
