@@ -16,10 +16,21 @@ const SimpleGridComponent = () => {
   const [tableData, setTableData] = useState<TableDataItem[]>([]);
 
   // csv 형식으로 저장
+  // utf-8 BOM 추가로 한글이 깨지는 문제 해결 (06.23)
   const handleExportCSV = () => {
     if (tableRef.current && tableRef.current.table) {
       const table = tableRef.current.table;
-      table.download("csv", "data.csv");
+      const data = table.getData();
+      const csvContent =
+        "data:text/csv;charset=utf-8,\uFEFF" +
+        XLSX.utils.sheet_to_csv(XLSX.utils.json_to_sheet(data));
+      const encodedUri = encodeURI(csvContent);
+      const link = document.createElement("a");
+      link.setAttribute("href", encodedUri);
+      link.setAttribute("download", "data.csv");
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
   };
 
@@ -65,14 +76,14 @@ const SimpleGridComponent = () => {
     { id: 2, name: "Mary May", age: "1", col: "blue", dob: "14/05/1982" },
     {
       id: 3,
-      name: "Christine Lobowski",
+      name: "수연",
       age: "42",
       col: "green",
       dob: "22/05/1982",
     },
     {
       id: 4,
-      name: "Brendon Philips",
+      name: "와왕왕왕수연",
       age: "125",
       col: "orange",
       dob: "01/08/1980",
