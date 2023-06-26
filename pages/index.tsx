@@ -10,6 +10,8 @@ import GridDropdown from "@/components/dropdown/GridDropdown";
 import SelectQueueTopicTest from "@/components/Modal/SelectQueueTopicTest";
 import SimpleGridComponent from "@/components/GridTest/simpleGridComponent";
 import ExportTest from "@/components/GridTest/exportTest";
+import QueueListProertyTest from "@/components/Modal/queueListPropertyTest";
+import QueueProertyTest from "@/components/Modal/queuePropertyTest";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -19,6 +21,8 @@ export default function Home() {
       <div style={{ height: "800px", background: "#f7ddd1" }}>
         <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
           <SelectQueueTopicTest />
+          <QueueListProertyTest />
+          <QueueProertyTest />
           <br />
           <br />
           <SimpleDropdown />
