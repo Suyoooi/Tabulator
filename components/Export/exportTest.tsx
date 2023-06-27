@@ -7,7 +7,7 @@ const ExportTest = () => {
         style={{ backgroundColor: "pink", width: 100, borderRadius: 10 }}
         onClick={() => {
           axios({
-            url: "http://192.168.10.55:8080/api/v1/ems",
+            url: "http://192.168.10.72:8080/monitor/queue/hist/excel",
             method: "get",
             responseType: "blob",
           }).then((response) => {
