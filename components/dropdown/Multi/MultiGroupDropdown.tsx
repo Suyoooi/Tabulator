@@ -84,7 +84,7 @@ const MultiGroupDropdown = () => {
       hozAlign: "center",
       headerSort: false,
       cssClass: "text-center",
-      cellClick: function (cell: CellComponent) {
+      cellClick: function (_e: any, cell: { getRow: () => any }) {
         const row = cell.getRow();
         row.toggleSelect();
       },
