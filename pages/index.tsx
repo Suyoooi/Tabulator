@@ -9,24 +9,45 @@ import MultiBothSearchDropdown from "@/components/dropdown/Multi/MultiBothSearch
 import GridDropdown from "@/components/dropdown/GridDropdown";
 import SelectQueueTopicTest from "@/components/Modal/Select/SelectQueueTopicTest";
 import QueueListProertyTest from "@/components/Modal/List/queueListPropertyTest";
-import QueueProertyTest from "@/components/Modal/List/queuePropertyTest";
+import QueueProertyTest from "@/components/Modal/List/genericTableModalButton";
 import DoubleCalendarWithTimePicker from "@/components/timeSetting/DoubleCalenderWithTimePicker";
 import OneDoubleDatePicker from "@/components/timeSetting/OneDoubleDatePicker";
 import QuickDatePicker from "@/components/timeSetting/QuickDatePicker";
+import SingleCalendarWithTimePicker from "@/components/timeSetting/SingleCalendarWithTimePicker";
+import GenericTableModalButton from "@/components/Modal/List/genericTableModalButton";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const columns = [
+  { title: "QueueProperty", field: "queueProperty", hozAlign: "center" },
+  { title: "Value", field: "value", hozAlign: "center" },
+];
+
+const rowData = [
+  { queueProperty: "a", value: "EMS1" },
+  { queueProperty: "a", value: "EMS2" },
+  { queueProperty: "b", value: "EMS3" },
+  { queueProperty: "c", value: "EMS4" },
+  { queueProperty: "d", value: "EMS5" },
+  { queueProperty: "e", value: "EMS6" },
+  { queueProperty: "b", value: "EMS7" },
+];
+
+const title = "Queue Property";
 
 export default function Home() {
   return (
     <>
-      <div style={{ height: "800px", background: "#f7ddd1" }}>
+      <div style={{ height: "100%", background: "#fde5d2" }}>
         <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
           <div>
             <SelectQueueTopicTest />
-            <QueueListProertyTest />
-            <QueueProertyTest />
+            <GenericTableModalButton
+              columns={columns}
+              rowData={rowData}
+              title={title}
+            />
           </div>
-          <br />
           <br />
           <SimpleDropdown />
           <br />
@@ -35,7 +56,7 @@ export default function Home() {
           <MultiGroupDropdown />
           <br />
         </div>
-        <div style={{ display: "flex", gap: 60, marginBottom: 100 }}>
+        <div style={{ display: "flex", gap: 60, marginBottom: 50 }}>
           <br />
           <SingleTabulatorDropdown />
           <br />
@@ -47,7 +68,14 @@ export default function Home() {
           <br />
           <GridDropdown />
         </div>
-        <div style={{ display: "flex", gap: 60, marginBottom: 100 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 20,
+            marginBottom: 100,
+          }}
+        >
           <br />
           <DoubleCalendarWithTimePicker />
           <br />
@@ -55,7 +83,7 @@ export default function Home() {
           <br />
           <QuickDatePicker />
           <br />
-          <SingleTabulatorDropdown />
+          <SingleCalendarWithTimePicker />
           <br />
         </div>
         {/* <SimpleGridComponent /> */}

@@ -1,32 +1,20 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { ReactTabulator } from "react-tabulator";
 
-interface TableDataItem {
-  queueProperty: string;
-  value: string;
-}
-
-interface SelectQueueListProps {
+interface GenericTableProps {
   handleClose: () => void;
+  columns: any[];
+  rowData: any[];
+  title: string;
 }
 
-const initialData: TableDataItem[] = [
-  { queueProperty: "a", value: "EMS1" },
-  { queueProperty: "a", value: "EMS2" },
-  { queueProperty: "b", value: "EMS3" },
-  { queueProperty: "c", value: "EMS4" },
-  { queueProperty: "d", value: "EMS5" },
-  { queueProperty: "e", value: "EMS6" },
-  { queueProperty: "b", value: "EMS7" },
-];
-
-const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
+const GenericTableModal: React.FC<GenericTableProps> = ({
+  handleClose,
+  columns,
+  rowData,
+  title,
+}) => {
   const [openModal, setOpenModal] = useState<boolean>(true);
-
-  const columns = [
-    { title: "QueueProperty", field: "QueueProperty", hozAlign: "center" },
-    { title: "Value", field: "Value", hozAlign: "center" },
-  ];
 
   const options = {
     layout: "fitColumns",
@@ -34,7 +22,6 @@ const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
     printVisibleRowsOnly: true,
     movableColumns: true,
   };
-
   const handleButtonClick = () => {
     handleClose();
   };
@@ -72,9 +59,7 @@ const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
                 marginBottom: 10,
               }}
             >
-              <div style={{ fontWeight: 600, fontSize: 20 }}>
-                Queue Property
-              </div>
+              <div style={{ fontWeight: 600, fontSize: 20 }}>{title}</div>
               <img src="/download.png" style={{ cursor: "pointer" }}></img>
             </div>
             <div
@@ -86,7 +71,7 @@ const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
             >
               <table className="w-full border-collapse">
                 <ReactTabulator
-                  data={initialData}
+                  data={rowData}
                   columns={columns}
                   options={options}
                   layout={"fitData"}
@@ -113,4 +98,4 @@ const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
   );
 };
 
-export default QueueProperty;
+export default GenericTableModal;

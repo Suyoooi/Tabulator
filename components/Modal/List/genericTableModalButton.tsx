@@ -1,7 +1,19 @@
 import { useState } from "react";
-import QueueProperty from "./queueProperty";
+import GenericTableModal from "./genericTableModal";
 
-const QueueProertyTest = () => {
+interface GenericTableModalButtonProps {
+  columns: any[];
+  rowData: any[];
+  title: string;
+  buttonText?: string;
+}
+
+const GenericTableModalButton: React.FC<GenericTableModalButtonProps> = ({
+  columns,
+  rowData,
+  title,
+  buttonText,
+}) => {
   const [openModal, setOpenModal] = useState<boolean>(false);
 
   const handleButtonClick = () => {
@@ -22,13 +34,20 @@ const QueueProertyTest = () => {
             border: "2px solid black",
           }}
         >
-          Queue Property
+          {buttonText || title}
         </button>
       </div>
 
-      {openModal === true && <QueueProperty handleClose={handleButtonClick} />}
+      {openModal && (
+        <GenericTableModal
+          handleClose={handleButtonClick}
+          columns={columns}
+          rowData={rowData}
+          title={title}
+        />
+      )}
     </>
   );
 };
 
-export default QueueProertyTest;
+export default GenericTableModalButton;
