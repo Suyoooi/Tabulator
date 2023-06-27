@@ -7,11 +7,12 @@ import SimpleCategoryDropdown from "@/components/dropdown/SimpleCategoryDropdown
 import MultiTabulatorDropdown from "@/components/dropdown/Multi/MultiTabulatorDropdown";
 import MultiBothSearchDropdown from "@/components/dropdown/Multi/MultiBothSearchDropdown";
 import GridDropdown from "@/components/dropdown/GridDropdown";
-import SelectQueueTopicTest from "@/components/Modal/SelectQueueTopicTest";
-import SimpleGridComponent from "@/components/GridTest/simpleGridComponent";
-import ExportTest from "@/components/GridTest/exportTest";
-import QueueListProertyTest from "@/components/Modal/queueListPropertyTest";
-import QueueProertyTest from "@/components/Modal/queuePropertyTest";
+import SelectQueueTopicTest from "@/components/Modal/Select/SelectQueueTopicTest";
+import QueueListProertyTest from "@/components/Modal/List/queueListPropertyTest";
+import QueueProertyTest from "@/components/Modal/List/queuePropertyTest";
+import DoubleCalendarWithTimePicker from "@/components/timeSetting/DoubleCalenderWithTimePicker";
+import OneDoubleDatePicker from "@/components/timeSetting/OneDoubleDatePicker";
+import QuickDatePicker from "@/components/timeSetting/QuickDatePicker";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,6 +46,17 @@ export default function Home() {
           <MultiGroupDropdown />
           <br />
           <GridDropdown />
+        </div>
+        <div style={{ display: "flex", gap: 60, marginBottom: 100 }}>
+          <br />
+          <DoubleCalendarWithTimePicker />
+          <br />
+          <OneDoubleDatePicker />
+          <br />
+          <QuickDatePicker />
+          <br />
+          <SingleTabulatorDropdown />
+          <br />
         </div>
         {/* <SimpleGridComponent /> */}
       </div>
