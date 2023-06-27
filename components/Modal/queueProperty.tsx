@@ -36,64 +36,77 @@ const QueueProperty: React.FC<SelectQueueListProps> = ({ handleClose }) => {
   };
 
   const handleButtonClick = () => {
-    handleClose(); // 부모 컴포넌트의 상태 변경 함수 호출
+    handleClose();
   };
 
   return (
-    <div style={{ zIndex: 10 }}>
+    <div style={{ zIndex: 100 }}>
       {openModal === true && (
         <div
           style={{
-            paddingTop: 20,
-            paddingBottom: 10,
-            paddingLeft: 20,
-            paddingRight: 20,
-            // width: 400
-            // height: 400,
-            background: "white",
-            // textAlign: "-webkit-center",
-            textAlignLast: "center",
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100%",
+            height: "100%",
+            backgroundColor: "rgba(0, 0, 0, 0.3)",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           <div
             style={{
-              display: "flex",
-              justifyContent: "space-between",
-              marginBottom: 10,
+              paddingTop: 20,
+              paddingBottom: 10,
+              paddingLeft: 20,
+              paddingRight: 20,
+              background: "white",
+              textAlignLast: "center",
             }}
           >
-            <div style={{ fontWeight: 600, fontSize: 20 }}>Queue Property</div>
-            <img src="/download.png" style={{ cursor: "pointer" }}></img>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                marginBottom: 10,
+              }}
+            >
+              <div style={{ fontWeight: 600, fontSize: 20 }}>
+                Queue Property
+              </div>
+              <img src="/download.png" style={{ cursor: "pointer" }}></img>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                width: 300,
+              }}
+            >
+              <table className="w-full border-collapse">
+                <ReactTabulator
+                  data={initialData}
+                  columns={columns}
+                  options={options}
+                  layout={"fitData"}
+                />
+              </table>
+            </div>
+            <button
+              style={{
+                width: 60,
+                height: 30,
+                marginTop: 10,
+                backgroundColor: "ivory",
+                border: "2px solid grey",
+                borderRadius: 8,
+              }}
+              onClick={handleButtonClick}
+            >
+              닫기
+            </button>
           </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              width: 300,
-            }}
-          >
-            <table className="w-full border-collapse">
-              <ReactTabulator
-                data={initialData}
-                columns={columns}
-                options={options}
-                layout={"fitData"}
-              />
-            </table>
-          </div>
-          <button
-            style={{
-              width: 60,
-              height: 30,
-              marginTop: 10,
-              backgroundColor: "ivory",
-              border: "2px solid grey",
-              borderRadius: 8,
-            }}
-            onClick={handleButtonClick}
-          >
-            닫기
-          </button>
         </div>
       )}
     </div>

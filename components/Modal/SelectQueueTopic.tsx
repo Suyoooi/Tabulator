@@ -55,7 +55,7 @@ const SelectQueueTopic: React.FC<SelectQueueTopicProps> = ({ handleClose }) => {
   console.log(radioButtonText);
 
   const handleButtonClick = () => {
-    handleClose(); // 부모 컴포넌트의 상태 변경 함수 호출
+    handleClose();
   };
   const handleTopicRadioButtonClick = () => {
     setTopicButton(true);
