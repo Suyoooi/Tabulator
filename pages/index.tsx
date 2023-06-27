@@ -20,9 +20,11 @@ export default function Home() {
     <>
       <div style={{ height: "800px", background: "#f7ddd1" }}>
         <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
-          <SelectQueueTopicTest />
-          <QueueListProertyTest />
-          <QueueProertyTest />
+          <div>
+            <SelectQueueTopicTest />
+            <QueueListProertyTest />
+            <QueueProertyTest />
+          </div>
           <br />
           <br />
           <SimpleDropdown />
@@ -44,8 +46,7 @@ export default function Home() {
           <br />
           <GridDropdown />
         </div>
-        {/* <SimpleGridComponent />
-        <ExportTest /> */}
+        {/* <SimpleGridComponent /> */}
       </div>
     </>
   );
