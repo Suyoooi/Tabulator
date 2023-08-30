@@ -7,7 +7,7 @@ const ExportTest = () => {
         style={{ backgroundColor: "pink", width: 100, borderRadius: 10 }}
         onClick={() => {
           axios({
-            url: "http://192.168.10.72:8080/monitor/queue/hist/excel",
+            url: "http://192.168.10.111:38083/monitor/queue/hist/excel",
             method: "get",
             responseType: "blob",
           }).then((response) => {
@@ -18,7 +18,7 @@ const ExportTest = () => {
             const url = window.URL.createObjectURL(blob);
             const a = document.createElement("a");
             a.href = url;
-            a.download = "test.zip";
+            a.download = "test000.zip";
             a.click();
             window.URL.revokeObjectURL(url);
           });

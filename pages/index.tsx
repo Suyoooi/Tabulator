@@ -8,13 +8,20 @@ import MultiTabulatorDropdown from "@/components/dropdown/Multi/MultiTabulatorDr
 import MultiBothSearchDropdown from "@/components/dropdown/Multi/MultiBothSearchDropdown";
 import GridDropdown from "@/components/dropdown/GridDropdown";
 import SelectQueueTopicTest from "@/components/Modal/Select/SelectQueueTopicTest";
-import QueueListProertyTest from "@/components/Modal/List/queueListPropertyTest";
 import QueueProertyTest from "@/components/Modal/List/genericTableModalButton";
 import DoubleCalendarWithTimePicker from "@/components/timeSetting/DoubleCalenderWithTimePicker";
 import OneDoubleDatePicker from "@/components/timeSetting/OneDoubleDatePicker";
 import QuickDatePicker from "@/components/timeSetting/QuickDatePicker";
 import SingleCalendarWithTimePicker from "@/components/timeSetting/SingleCalendarWithTimePicker";
 import GenericTableModalButton from "@/components/Modal/List/genericTableModalButton";
+import SimpleGridComponent from "@/components/GridTest/simpleGridComponent";
+import ExportTest from "@/components/Export/exportTest";
+import TabulatorDataTree from "@/components/GridTest/tabulatorDataTree";
+import Component1 from "@/components/Project/component1";
+import RadioBtnT from "@/components/Project/RadioBtnT";
+import RadioBtnF from "@/components/Project/RadioBtnF";
+import MiddleBtn from "@/components/Project/MiddleBtn";
+import MiddleBtnBlack from "@/components/Project/MiddleBtnBlack";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -39,7 +46,11 @@ export default function Home() {
   return (
     <>
       <div style={{ height: "100%", background: "#fde5d2" }}>
-        <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
+        {/* <div style={{ display: "flex", gap: 50, marginBottom: 100 }}>
+          <div>
+            <TabulatorDataTree />
+            <SimpleGridComponent />
+          </div>
           <div>
             <SelectQueueTopicTest />
             <GenericTableModalButton
@@ -58,6 +69,7 @@ export default function Home() {
         </div>
         <div style={{ display: "flex", gap: 60, marginBottom: 50 }}>
           <br />
+          <ExportTest />
           <SingleTabulatorDropdown />
           <br />
           <MultiTabulatorDropdown />
@@ -85,8 +97,13 @@ export default function Home() {
           <br />
           <SingleCalendarWithTimePicker />
           <br />
-        </div>
-        {/* <SimpleGridComponent /> */}
+        </div> */}
+
+        <Component1 />
+        <RadioBtnT />
+        <RadioBtnF />
+        <MiddleBtn text={"승낙"} />
+        <MiddleBtnBlack text={"거절"} />
       </div>
     </>
   );

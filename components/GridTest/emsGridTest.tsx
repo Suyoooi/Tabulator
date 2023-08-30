@@ -20,7 +20,7 @@ const emsGridTest = () => {
   const columns = [
     {
       title: "",
-      width: 70,
+      width: 70 ,
       formatter: "rowSelection",
       titleFormatter: "rowSelection",
       hozAlign: "center",
