@@ -98,12 +98,6 @@ export default function Home() {
           <SingleCalendarWithTimePicker />
           <br />
         </div> */}
-
-        <Component1 />
-        <RadioBtnT />
-        <RadioBtnF />
-        <MiddleBtn text={"승낙"} />
-        <MiddleBtnBlack text={"거절"} />
       </div>
     </>
   );
