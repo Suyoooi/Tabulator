@@ -17,11 +17,6 @@ import GenericTableModalButton from "@/components/Modal/List/genericTableModalBu
 import SimpleGridComponent from "@/components/GridTest/simpleGridComponent";
 import ExportTest from "@/components/Export/exportTest";
 import TabulatorDataTree from "@/components/GridTest/tabulatorDataTree";
-import Component1 from "@/components/Project/component1";
-import RadioBtnT from "@/components/Project/RadioBtnT";
-import RadioBtnF from "@/components/Project/RadioBtnF";
-import MiddleBtn from "@/components/Project/MiddleBtn";
-import MiddleBtnBlack from "@/components/Project/MiddleBtnBlack";
 
 const inter = Inter({ subsets: ["latin"] });
 
