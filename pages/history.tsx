@@ -203,6 +203,65 @@ const History = () => {
           </div>
         </div>
       </div>
+      {/* 네모네모2 */}
+      <div
+        style={{
+          border: "2px solid #4B4B4B",
+          padding: 16,
+          backgroundColor: "#fff",
+          borderRadius: 4,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <div style={{ display: "flex", gap: 8 }}>
+            <div
+              style={{
+                borderRadius: 50,
+                backgroundColor: "gray",
+                width: 40,
+                height: 40,
+              }}
+            />
+            <div
+              style={{
+                color: "#1B1B1B",
+                fontSize: 16,
+                fontWeight: 600,
+                alignSelf: "center",
+              }}
+            >
+              세수하기
+            </div>
+          </div>
+          <div
+            style={{
+              color: "#1B1B1B",
+              fontSize: 16,
+              fontWeight: 400,
+              alignItems: "center",
+            }}
+          >
+            <div>10 분</div>
+          </div>
+        </div>
+      </div>
+      <div
+        style={{
+          borderRadius: 50,
+          backgroundColor: "#FEAC54",
+          width: 40,
+          height: 40,
+          border: "2px solid #4B4B4B",
+        }}
+      >
+        +
+      </div>
     </div>
   );
 };
