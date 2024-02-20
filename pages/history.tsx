@@ -9,6 +9,8 @@ const History = () => {
         display: "flex",
         flexDirection: "column",
         justifyContent: "center",
+        paddingLeft: 24,
+        paddingRight: 24,
       }}
     >
       <div
@@ -127,8 +129,77 @@ const History = () => {
           }}
         >
           <div style={{ width: 24, height: 24, border: "1px solid #EB0016" }} />
-          <div style={{ color: "##EB0016", fontSize: 15, fontWeight: 700 }}>
+          <div style={{ color: "#EB0016", fontSize: 15, fontWeight: 700 }}>
             삭제하기
+          </div>
+        </div>
+      </div>
+
+      {/* 네모네모 */}
+      <div
+        style={{
+          border: "2px solid #4B4B4B",
+          padding: 16,
+          backgroundColor: "#fff",
+          borderRadius: 4,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+          }}
+        >
+          <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                gap: 8,
+                alignItems: "center",
+                marginBottom: 12,
+              }}
+            >
+              <div style={{ color: "#1B1B1B", fontSize: 20, fontWeight: 700 }}>
+                routine name
+              </div>
+              <div style={{ color: "#1B1B1B", fontSize: 16, fontWeight: 600 }}>
+                |
+              </div>
+              <div style={{ color: "#1B1B1B", fontSize: 16, fontWeight: 600 }}>
+                n개
+              </div>
+            </div>
+            <div style={{ display: "flex", gap: 4, flexDirection: "column" }}>
+              <div>시작 시간: nn:nn AM</div>
+              <div>총 소요 시간: nn시간 nn분</div>
+            </div>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "space-between",
+            }}
+          >
+            <button
+              style={{
+                width: 48,
+                height: 28,
+                borderRadius: 20,
+                backgroundColor: "pink",
+              }}
+            />
+            <button
+              style={{
+                width: 24,
+                height: 24,
+                borderRadius: 10,
+                backgroundColor: "gray",
+                alignSelf: "center",
+              }}
+            />
           </div>
         </div>
       </div>
@@ -137,3 +208,9 @@ const History = () => {
 };
 
 export default History;
+
+// const textStyle = {
+//     color: isDisabled ? "#969696" : "#1B1B1B",
+//     fontSize: 16,
+//     fontWeight: 600,
+//   };
