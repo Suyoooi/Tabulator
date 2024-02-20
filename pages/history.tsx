@@ -1,12 +1,23 @@
 const History = () => {
   return (
-    <div style={{ marginTop: 30, marginLeft: 30 }}>
+    <div
+      style={{
+        marginTop: 30,
+        marginLeft: 30,
+        width: 375,
+        backgroundColor: "#f4ffc4",
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "center",
+      }}
+    >
       <div
         style={{
           width: 304,
           border: "2px solid #4B4B4B",
           borderRadius: 8,
           overflow: "hidden",
+          justifyContent: "center",
         }}
       >
         <div
@@ -70,7 +81,7 @@ const History = () => {
       {/* 복사/삭제하기 */}
       <div
         style={{
-          width: 122,
+          width: 128,
           border: "2px solid #4B4B4B",
           borderRadius: 4,
           backgroundColor: "#fff",
@@ -82,13 +93,26 @@ const History = () => {
             flexDirection: "row",
             gap: 8,
             padding: 8,
-            // paddingLeft: 16,
-            // paddingRight: 16,
+
             borderBottom: "2px solid #4B4B4B",
           }}
         >
-          <div style={{ width: 24, height: 24, border: "1px solid #1B1B1B" }} />
-          <div style={{ color: "#1B1B1B", fontSize: 15, fontWeight: 700 }}>
+          <div
+            style={{
+              width: 24,
+              height: 24,
+              border: "1px solid #1B1B1B",
+              marginLeft: 8,
+            }}
+          />
+          <div
+            style={{
+              color: "#1B1B1B",
+              fontSize: 15,
+              fontWeight: 700,
+              marginRight: 8,
+            }}
+          >
             복사하기
           </div>
         </div>
