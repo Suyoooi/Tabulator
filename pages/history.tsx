@@ -247,7 +247,7 @@ const History = () => {
               alignItems: "center",
             }}
           >
-            <div>10 분</div>
+            10 분
           </div>
         </div>
       </div>
@@ -261,6 +261,46 @@ const History = () => {
         }}
       >
         +
+      </div>
+      <div
+        style={{
+          border: "2px solid #4B4B4B",
+          backgroundColor: "#FFC4CA",
+          borderRadius: 4,
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            gap: 8,
+            paddingLeft: 24,
+            paddingRight: 24,
+            paddingTop: 16,
+            paddingBottom: 16,
+          }}
+        >
+          <button
+            style={{
+              width: 24,
+              height: 24,
+              borderRadius: 10,
+              backgroundColor: "gray",
+              alignSelf: "center",
+            }}
+          />
+          <div
+            style={{
+              color: "#1B1B1B",
+              fontSize: 14,
+              fontWeight: 400,
+              fontStyle: "normal",
+              lineHeight: "150%",
+              letterSpacing: -0.14,
+            }}
+          >
+            '출근 준비' 과정이 08:07 AM에 시작됩니다.
+          </div>
+        </div>
       </div>
     </div>
   );
