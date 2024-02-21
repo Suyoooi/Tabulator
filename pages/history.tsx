@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 const History = () => {
   return (
     <div
@@ -220,12 +222,15 @@ const History = () => {
           }}
         >
           <div style={{ display: "flex", gap: 8 }}>
-            <div
+            <Image
+              src={"/brushTeeth.png"}
+              alt={"brushTeeth"}
+              width={32}
+              height={32}
               style={{
+                backgroundColor: "#E1E1E1",
                 borderRadius: 50,
-                backgroundColor: "gray",
-                width: 40,
-                height: 40,
+                padding: 4,
               }}
             />
             <div
@@ -262,6 +267,7 @@ const History = () => {
       >
         +
       </div>
+      {/* toast message */}
       <div
         style={{
           border: "2px solid #4B4B4B",
@@ -279,26 +285,29 @@ const History = () => {
             paddingBottom: 16,
           }}
         >
-          <button
+          <div
             style={{
+              backgroundColor: "#E1E1E1",
+              borderRadius: 50,
               width: 24,
               height: 24,
-              borderRadius: 10,
-              backgroundColor: "gray",
-              alignSelf: "center",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
+          >
+            <Image src={"/fire.png"} alt={"fire"} width={20} height={20} />
+          </div>
           <div
             style={{
               color: "#1B1B1B",
               fontSize: 14,
               fontWeight: 400,
-              fontStyle: "normal",
-              lineHeight: "150%",
               letterSpacing: -0.14,
+              alignSelf: "center",
             }}
           >
-            '출근 준비' 과정이 08:07 AM에 시작됩니다.
+            '@@' 과정이 08:07 AM에 시작됩니다.
           </div>
         </div>
       </div>
@@ -307,6 +316,9 @@ const History = () => {
 };
 
 export default History;
+
+// ** 개발 논의 사항 **
+// 이미지에 백그라운드를 직접...? 입히는 게 좋을 것 같음.!
 
 // const textStyle = {
 //     color: isDisabled ? "#969696" : "#1B1B1B",
